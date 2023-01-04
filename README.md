@@ -1,14 +1,8 @@
-# brutalitsm
+# BrutalITSM
+Влажная фантазия каждого IT-специалиста, который постоянно работает с обращением пользователей.
 
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+## Что делает сервис ?
+По задумке, это фановый Service Desk, который максимально нацелен демотивировать пользователя делать обращение, а исполнители (IT-специалисты) могут без угрызения совести посылать пользователя нахуй и им за это ничего не будет.
 
 ## Project Setup
 
