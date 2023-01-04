@@ -1,5 +1,14 @@
 export const news = [
     {
+        id: "b72c67de-0b44-423e-9003-16fc24c2d26b",
+        author: "Zooooooooy",
+        date_public: "2023-01-04",
+        status: "public",
+        theme: "Андрюша мастер картинок нейросети",
+        content: "Нахуй вам техподдержка, лучше взгляните на картинки нейросети, которые клепает главный техподдержник Андрюша.",
+        image: "4.png"
+    },
+    {
         id: "38ec6dca-ec32-449a-a85e-64d7eaf65db9",
         author: "Главный похуист всея IT",
         date_public: "2023-01-04",
