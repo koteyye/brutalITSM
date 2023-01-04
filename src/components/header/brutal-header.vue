@@ -35,11 +35,12 @@ export default {
 
 .brutalITSM {
   margin-top: 5px;
-  padding: 10px 35px;
+  padding: 10px 25px;
   height: 100px;
   position: sticky;
   top: 0;
   display: flex;
+  background: $--color-headerbg;
 
   &__logo {
     display: grid;
@@ -50,16 +51,20 @@ export default {
     font-family: Faceless;
     font-size: 30px;
     letter-spacing: 10px;
+    text-align: center;
   }
 
   &__menu {
     display: flex;
+    margin-left: 1px;
 
   }
 }
 
 .nahui {
   margin-left: 10px;
+  position: sticky;
+  padding: 5px 2px;
 }
 
 .title {
@@ -67,15 +72,21 @@ export default {
   font-family: KistyCC;
   font-size: 23px;
   letter-spacing: 3px;
-  margin-left: 70px;
   padding: 10px;
+  text-align: center;
+  margin: auto 20px;
   &:hover {
     text-decoration: none;
     color: $--color-apsidgray;
     border: solid 1px $--color-apsidgray;
     border-radius: $radius*2;
+    border-style: groove;
 
   }
+}
+
+.button-btn {
+  margin: auto;
 }
 
 
