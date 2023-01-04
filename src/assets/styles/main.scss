@@ -1,0 +1,58 @@
+@import "fonts";
+@import "color";
+@import "var";
+
+body {
+  margin: 0;
+  background: $--color-black;
+}
+
+.text {
+  color: $--color-apsidgray;
+  font-family: KistyCC;
+  font-size: 20px;
+  letter-spacing: 3px;
+}
+
+ul {
+  padding-left: 30px;
+  margin-top: 12px;
+  margin-bottom: 0;
+}
+
+h2 {
+  margin: 0;
+}
+
+.link {
+  color: #2c3e50;
+  text-decoration: none;
+}
+
+link:hover {
+  color: #007CFF
+}
+
+.btn {
+  border-radius: $radius
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.justify-space-between {
+  justify-content: space-between;
+}
+
+.justify-end {
+  justify-content: end;
+}
+
+.flex {
+  display: flex;
+}
