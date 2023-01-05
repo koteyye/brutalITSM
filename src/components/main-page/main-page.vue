@@ -18,8 +18,8 @@
 <script>
 import {news} from "@/components/main-page/news";
 import {defineComponent} from "vue";
-import brutalNews from "@/components/brutal-news";
-import brutalContactInfo from "@/components/brutal-contact-info";
+import brutalNews from "@/components/main-page/brutal-news";
+import brutalContactInfo from "@/components/main-page/brutal-contact-info";
 
 export default defineComponent({
   name: "MainPage",
@@ -57,6 +57,7 @@ export default defineComponent({
   margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 10px;
+  max-width: 1400px;
 }
 
 </style>

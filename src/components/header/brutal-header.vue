@@ -7,10 +7,10 @@
       </div>
     </div>
     <div class="brutalITSM__menu">
-      <div class="title cursor-pointer myrequest">Мои траблы</div>
-      <div class="title cursor-pointer stukach">Каталог траблов</div>
-      <div class="title cursor-pointer otziv">Анонимные отзывы обо мне от исполнителей</div>
-      <div class="title cursor-pointer reiting">АнтиРейтинг</div>
+      <div class="title cursor-pointer myrequest" @click="handleTrabls">Мои траблы</div>
+      <div class="title cursor-pointer stukach" @click="handleTrablCatalog">Каталог траблов</div>
+      <div class="title cursor-pointer otziv" @click="handleFeedback">Анонимные отзывы обо мне от исполнителей</div>
+      <div class="title cursor-pointer reiting" @click="handleRating">АнтиРейтинг</div>
       <div class="cursor-pointer nahui">
         <div class="nahui">
           <brutal-button icon="fa-solid fa-person-walking-dashed-line-arrow-right"/>
@@ -23,11 +23,37 @@
 
 <script>
 import brutalButton from "@/components/button/brutal-button.vue";
+import {defineComponent} from "vue";
+import {useRoute, useRouter} from "vue-router";
+import {RoutesNames} from "@/shared";
 
-export default {
+export default defineComponent( {
   name: "brutalHeader",
-  components: {brutalButton}
-}
+  components: {brutalButton},
+  setup() {
+    const router = useRouter()
+
+    function handleTrablCatalog() {
+      router.push({name: RoutesNames.CatalogTrabl})
+    }
+    function handleTrabls() {
+      router.push({name: RoutesNames.Trabls})
+    }
+    function handleFeedback() {
+      router.push({name: RoutesNames.Feedback})
+    }
+    function handleRating() {
+      router.push({name: RoutesNames.AntiRating})
+    }
+    function handleLogoClick() {
+      router.push({name: RoutesNames.Main})
+    }
+
+    return {
+      handleFeedback, handleRating, handleTrabls, handleTrablCatalog, handleLogoClick
+    }
+  }
+})
 </script>
 
 <style lang="scss">

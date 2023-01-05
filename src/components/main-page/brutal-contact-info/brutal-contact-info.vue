@@ -31,11 +31,12 @@ export default defineComponent( {
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/styles/main.scss';
+@import '../../../assets/styles/main';
 
 .contact-info {
   border: solid 1px $--color-apsidgray;
   margin-top: 10px;
+  max-width: 350px;
 }
 
 .contact {
@@ -49,6 +50,7 @@ export default defineComponent( {
 
 .phone {
   display: flex;
+  padding-left: 5px;
   &__name {
     margin: auto;
   }
@@ -57,6 +59,7 @@ export default defineComponent( {
 .email {
   display: flex;
   padding-bottom: 10px;
+  padding-left: 5px;
   &__name {
     margin: auto
   }
@@ -64,6 +67,7 @@ export default defineComponent( {
 
 .preview-contact {
   padding: 10px;
+  text-align: center;
 }
 
 </style>
