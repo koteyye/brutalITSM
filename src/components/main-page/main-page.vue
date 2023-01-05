@@ -16,10 +16,10 @@
 </template>
 
 <script>
-import {news} from "@/components/main-page/news";
-import {defineComponent} from "vue";
+import {defineComponent, onMounted, ref} from "vue";
 import brutalNews from "@/components/main-page/brutal-news";
 import brutalContactInfo from "@/components/main-page/brutal-contact-info";
+import {baseUrl} from "@/shared/path-names";
 
 export default defineComponent({
   name: "MainPage",
@@ -28,6 +28,16 @@ export default defineComponent({
   },
   props: {},
   setup() {
+    const news = ref([])
+
+    onMounted(async()=>await getNews())
+
+    async function getNews() {
+      const response = await fetch(`${baseUrl}/news`)
+      news.value = await response.json()
+      console.log(news)
+    }
+
     return {
       news
     }

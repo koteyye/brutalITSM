@@ -1,0 +1,191 @@
+{
+  "users": [
+    {
+      "id": "663a150a-a57e-497c-b9af-d9c34e7117eb",
+      "name": "Самый ИТ-похуист"
+    },
+    {
+      "id": "54563a95-591b-4937-a9c0-0a16c48da30b",
+      "name": "Zooooooooy"
+    },
+    {
+      "id": "045df558-7eed-4203-9fe5-03fe3406a170",
+      "name": "IT-Rabbit"
+    },
+    {
+      "id": "272aa22b-41df-49a2-bf84-c31b35f6eef4",
+      "name": "Знаток твоей мамки"
+    }
+  ],
+  "news": [
+    {
+      "id": "8fcbe045-2dfc-4b24-8acc-27b0f752a9bd",
+      "userId": "663a150a-a57e-497c-b9af-d9c34e7117eb",
+      "datePublic": "2023-01-04",
+      "status": "Public",
+      "theme": "Назло пожаловать на brutal ITSM",
+      "content": "Ты попал сюда далеко не случайно, ты либо имбецил неспособный самостоятельно решить проблему связанную с твоим оборудованием, либо ты настолько тупой, что неспособен даже прочесть инструкцию прежде чем пиздюхать в ИТ-поддержку. Ну ничего страшного, воспользовавшись нашим сервисом вы неприменно станете чуточку умнее! Потому что имено наш сервис настолько много раз пошлет тебя нахуй, что ты поймешь, что разобраться самому быстрее.",
+      "image": "1.png"
+    },
+    {
+      "id": "b72c67de-0b44-423e-9003-16fc24c2d26b",
+      "userId": "54563a95-591b-4937-a9c0-0a16c48da30b",
+      "datePublic": "2023-01-04",
+      "status": "Public",
+      "theme": "Андрюша мастер картинок нейросети",
+      "content": "Нахуй вам техподдержка, лучше взгляните на картинки нейросети, которые клепает главный техподдержник Андрюша.",
+      "image": "4.png"
+    },
+    {
+      "id": "4ed4a7bc-a6fd-49f1-adcd-267986fec610",
+      "userId": "272aa22b-41df-49a2-bf84-c31b35f6eef4",
+      "datePublic": "2023-01-04",
+      "status": "Public",
+      "theme": "Интервью с главным техподдержщиком",
+      "content": "<p>Напиши какую-нибудь новость/мини статью, которую ты хотел бы написать в своем itsm, но стеснялся это сделать )</p><p> Не знаю, я чет ничего не хочу Чет все заебало :) Бывает</p>",
+      "image": "3.png"
+    }
+  ],
+  "catalogTrabl": [
+    {
+      "serviceId": "d91effe6-36a7-44df-b219-8210e080cf9e",
+      "serviceName": "IT",
+      "serviceDescription": "Лучший в мире сервис",
+      "image": "logoIT.png",
+      "categories": [
+        {
+          "categoryId": "628b974b-68e1-4ed3-9b30-d8fef86c8deb",
+          "categoryName": "Техподдержка",
+          "trablType": [
+            {
+              "trablTypeId": "5f2b351f-45d1-468e-b0f5-884cd4a833f4",
+              "trablTypeName": "Сломался компуктер",
+              "trablTypeDiscription": "Не работает компуктер и вы нихуя не понимаете почему. По статистике, большинство проблем с компуктером устраняется ребутом, передергиванием и ударом ного по системнику. Если вы даже на это неспособны, то этот трабл для Вас",
+              "trablTypeBlowJobId": "10492405-8c88-431f-a4ff-f0370687f970"
+            },
+            {
+              "trablTypeId": "fd38eecd-fcb9-44fb-a2d6-d07efc8f5144",
+              "trablTypeName": "Удалил интернет",
+              "trablTypeDiscription": "Вы долбаеб, у которого просто не работает интернет, а вы думаете, что удалили его",
+              "trablTypeBlowJobId": "10492405-8c88-431f-a4ff-f0370687f970"
+            },
+            {
+              "trablTypeId": "1a6c4589-386a-4191-97cd-866be94964d0",
+              "trablTypeName": "Откусил шнур",
+              "trablTypeDiscription": "Вы кривожопый утырок, который каким-то непонятным образом откусил шнур",
+              "trablTypeBlowJobId": "10492405-8c88-431f-a4ff-f0370687f970"
+            },
+            {
+              "trablTypeId": "3a00171b-972e-459e-9949-caec61d7c517",
+              "trablTypeName": "Не открывается PornHub",
+              "trablTypeDiscription": "Вам стало скучно и одиноко ? Мы поможем",
+              "trablTypeBlowJobId": "10492405-8c88-431f-a4ff-f0370687f970"
+            },
+            {
+              "trablTypeId": "485dde02-cf66-405a-a0f8-44cc4a8e155e",
+              "trablTypeName": "Вынести мусор",
+              "trablTypeDiscription": "Ты долбаеб ?",
+              "trablTypeBlowJobId": "10492405-8c88-431f-a4ff-f0370687f970"
+            },
+            {
+              "trablTypeId": "8175bbc8-ca76-4fd5-b145-d60de0700e63",
+              "trablTypeName": "Закончилась бумага (в принтере)",
+              "trablTypeDiscription": "Обычно бумагу надо положить в специальный лоток в принтере, но если ты долбаеб, то возможно это сделаем и мы",
+              "trablTypeBlowJobId": "10492405-8c88-431f-a4ff-f0370687f970"
+            },
+            {
+              "trablTypeId": "4c1de277-baf3-4612-af5c-f764453f4a3d",
+              "trablTypeName": "Закончилась бумага (в туалете)",
+              "trablTypeDiscription": "Можно взять из принтера",
+              "trablTypeBlowJobId": "10492405-8c88-431f-a4ff-f0370687f970"
+            },
+            {
+              "trablTypeId": "d48c6425-8db7-4924-b645-3e2662ae43c5",
+              "trablTypeName": "Я обосрался",
+              "trablTypeDiscription": "Мы тоже",
+              "trablTypeBlowJobId": "10492405-8c88-431f-a4ff-f0370687f970"
+            },
+            {
+              "trablTypeId": "2e915806-1aea-456b-a794-38e8f8be68a5",
+              "trablTypeName": "Передернул (шнур)",
+              "trablTypeDiscription": "А больше ты ничего не передернул ?",
+              "trablTypeBlowJobId": "10492405-8c88-431f-a4ff-f0370687f970"
+            },
+            {
+              "trablTypeId": "cf3951ed-b805-4a89-8841-5a480b4e5201",
+              "trablTypeName": "Передернул (не шнур)",
+              "trablTypeDiscription": "Мы тоже",
+              "trablTypeBlowJobId": "10492405-8c88-431f-a4ff-f0370687f970"
+            }
+          ]
+        },
+        {
+          "categoryId": "e9421c2a-9301-4986-bc7e-49969d9142d7",
+          "categoryName": "Связь",
+          "trablType": [
+            {
+              "trablTypeId": "cf40e91a-6ceb-4d39-9f01-094fdc945cd9",
+              "trablTypeName": "Отвалился телефон",
+              "trablTypeDiscription": "Пользуйся мобилой или мессенджером, нахуй тебе телефон ?",
+              "trablTypeBlowJobId": "25c14a29-c363-43b9-a0f5-593b6232d997"
+            },
+            {
+              "trablTypeId": "6329a30a-e8b5-48d9-a59a-ff5d56fe4b47",
+              "trablTypeName": "Висячие провода",
+              "trablTypeDiscription": "Ну так поправь",
+              "trablTypeBlowJobId": "25c14a29-c363-43b9-a0f5-593b6232d997"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "serviceId": "2e4cd3cb-6356-49ab-943a-7c58bda9ab67",
+      "serviceName": "HR",
+      "serviceDescription": "Траблы для кадровых операций, справочек и подобной лабуды",
+      "image": "logoHR.png",
+      "categories": []
+    },
+    {
+      "serviceId": "692c307e-d479-4b97-817d-8bce79d288be",
+      "serviceName": "Finance",
+      "serviceDescription": "Траблы связанные с баблом, повышением зарплат и всякой подобней хрени",
+      "image": "logoFinance.png",
+      "categories": []
+    }
+  ],
+  "blowJobGroup": [
+    {
+      "blowJobGroupId": "10492405-8c88-431f-a4ff-f0370687f970",
+      "blowJobGroupName": "Техподдержники",
+      "blowJobGroupMembers": [
+        {
+          "userId": "663a150a-a57e-497c-b9af-d9c34e7117eb",
+          "userName": "Самый ИТ-похуист",
+          "userRole": "Насяйника"
+        },
+        {
+          "userId": "54563a95-591b-4937-a9c0-0a16c48da30b",
+          "userName": "Zooooooooy",
+          "userRole": "Равшан"
+        }
+      ]
+    },
+    {
+      "blowJobGroupId": "25c14a29-c363-43b9-a0f5-593b6232d997",
+      "blowJobGroupName": "Связники",
+      "blowJobGroupMembers": [
+        {
+          "userId": "045df558-7eed-4203-9fe5-03fe3406a170",
+          "userName": "IT-Rabbit",
+          "userRole": "Насяйника"
+        },
+        {
+          "userId": "272aa22b-41df-49a2-bf84-c31b35f6eef4",
+          "userName": "Знаток твоей мамки",
+          "userRole": "Равшан"
+        }
+      ]
+    }
+  ]
+}

@@ -3,12 +3,12 @@
     <h2 class="contact">Контакты</h2>
     <div class="text preview-contact">Если вы хотите, чтобы вас послали нахуй, вы можете воспользоваться одним из следующих каналов связи:</div>
     <div class="phone">
-      <brutal-button icon="fa-solid fa-phone" outlined="true"/>
+      <brutal-button icon="fa-solid fa-phone"/>
       <div class="text phone__name">Телефон:</div>
       <div class="title phone__number">34444</div>
     </div>
     <div class="email">
-      <brutal-button icon="fa-solid fa-envelope" outlined="true"/>
+      <brutal-button icon="fa-solid fa-envelope"/>
       <div class="text email__name">Email</div>
       <div class="title email__value">sd@dme.ru</div>
     </div>
