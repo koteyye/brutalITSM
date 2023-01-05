@@ -66,6 +66,9 @@ export default defineComponent({
     font-size: 50px;
     text-align: center;
     font-family: KistyCC;
+    &:hover {
+      color: $--color-huy
+    }
   }
 }
 
