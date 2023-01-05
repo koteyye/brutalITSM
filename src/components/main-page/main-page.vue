@@ -35,7 +35,6 @@ export default defineComponent({
     async function getNews() {
       const response = await fetch(`${baseUrl}/news`)
       news.value = await response.json()
-      console.log(news)
     }
 
     return {
