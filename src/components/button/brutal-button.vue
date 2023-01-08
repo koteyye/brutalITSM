@@ -98,8 +98,8 @@ export default {
     }
   }
 
-  &large {
-    height: 48px;
+  &_large {
+    height: 170px;
     padding: 0 30px;
   }
 
