@@ -58,6 +58,7 @@ export default defineComponent({
 .main-page {
   display: flex;
   margin-right: 20px;
+  justify-content: center;
 }
 
 .brutal-news__main {
