@@ -1,4 +1,4 @@
-
+<img src="https://github.com/koteyye/brutalITSM/blob/master/public/image/e59e420089878a578c464280bf4fbc42.gif?raw=true">
 
 # BrutalITSM
 Влажная фантазия каждого IT-специалиста, который постоянно работает с обращениями пользователей.
