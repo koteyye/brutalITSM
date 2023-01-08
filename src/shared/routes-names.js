@@ -4,5 +4,6 @@ export const RoutesNames = {
     CatalogTrabl: 'CatalogTrabl',
     Feedback: 'Feedback',
     AntiRating: 'AntiRating',
-    ServiceItem: 'ServiceItem'
+    ServiceItem: 'ServiceItem',
+    CreateTrabl: 'CreateTrabl'
 }

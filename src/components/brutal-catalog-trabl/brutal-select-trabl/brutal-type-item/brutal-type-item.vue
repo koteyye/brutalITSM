@@ -2,7 +2,7 @@
   <div class="itemrow typeItem">
     <div class="typeItem__name">{{typeItem.trablTypeName}}</div>
     <div class="typeItem__desc">{{typeItem.trablTypeDiscription }}</div>
-    <brutal-button class="typeItem__btn" size="large" label="Я тупой имбецил, неспособный решить проблему. Оформить трабл"/>
+    <brutal-button class="typeItem__btn" size="large" label="Я тупой имбецил, неспособный решить проблему. Оформить трабл" @click="createTrabl"/>
   </div>
 </template>
 
@@ -11,6 +11,7 @@ import {defineComponent} from "vue";
 import {useRouter} from "vue-router";
 import {RoutesNames} from "@/shared";
 import brutalButton from "@/components/button/brutal-button.vue";
+import {v4 as uuid4} from 'uuid';
 
 export default defineComponent({
   name: "brutalTypeItem",
@@ -25,7 +26,15 @@ export default defineComponent({
   },
   setup(props) {
     const router = useRouter()
-    console.log(props.typeItem)
+
+    function createTrabl() {
+      const id = uuid4(0x10)
+      router.push({name: RoutesNames.CreateTrabl, params: {id: id}})
+    }
+
+    return {
+      createTrabl
+    }
   }
 })
 </script>

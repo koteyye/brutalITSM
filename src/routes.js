@@ -31,6 +31,11 @@ const routes = [
         path: '/CatalogTrabl/ServiceItem/:id',
         name: RoutesNames.ServiceItem,
         component: () => import('./components/brutal-catalog-trabl/brutal-select-trabl/brutal-select-trabl.vue')
+    },
+    {
+        path: '/createTrabl/:id',
+        name: RoutesNames.CreateTrabl,
+        component: () => import('./components/brutal-catalog-trabl/brutal-create-trabl/brutal-create-trabl.vue')
     }
 ]
 
