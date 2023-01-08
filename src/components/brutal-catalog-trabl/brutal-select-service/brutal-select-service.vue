@@ -1,6 +1,6 @@
 <template>
     <div v-if="service.categories.length!==0">
-      <div class="select-service cursor-pointer">
+      <div class="select-service cursor-pointer" @click="serviceClick">
         <div class="servicelogo">
           <img :src="serviceLogo" alt="serviceLogo" width="300" height="337">
         </div>
@@ -24,6 +24,8 @@
 
 <script>
 import {computed, defineComponent} from "vue";
+import {useRouter} from "vue-router";
+import {RoutesNames} from "@/shared";
 
 export default defineComponent({
   name: "brutalSelectService",
@@ -37,9 +39,14 @@ export default defineComponent({
   },
   setup(props) {
     const serviceLogo = computed(()=> `/image/${props.service.image}`)
+    const router = useRouter()
+
+    function serviceClick() {
+      router.push({name: RoutesNames.ServiceItem, params: {id: props.service.serviceId}})
+    }
 
     return {
-      serviceLogo
+      serviceLogo, serviceClick
     }
   }
 })

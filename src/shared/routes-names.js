@@ -3,5 +3,6 @@ export const RoutesNames = {
     Trabls: 'Trabls',
     CatalogTrabl: 'CatalogTrabl',
     Feedback: 'Feedback',
-    AntiRating: 'AntiRating'
+    AntiRating: 'AntiRating',
+    ServiceItem: 'ServiceItem'
 }

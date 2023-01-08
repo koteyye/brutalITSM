@@ -26,6 +26,11 @@ const routes = [
         path: '/AntiRating',
         name: RoutesNames.AntiRating,
         component: () => import('./components/brutal-antirating/brutal-antirating.vue')
+    },
+    {
+        path: '/CatalogTrabl/ServiceItem/:id',
+        name: RoutesNames.ServiceItem,
+        component: () => import('./components/brutal-catalog-trabl/brutal-select-trabl/brutal-select-trabl.vue')
     }
 ]
 
