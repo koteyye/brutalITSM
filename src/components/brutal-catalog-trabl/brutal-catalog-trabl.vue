@@ -50,7 +50,7 @@ export default defineComponent( {
 .services {
   display: flex;
   padding: 30px 80px;
-  justify-content: space-between;
+  justify-content: center;
 
 }
 

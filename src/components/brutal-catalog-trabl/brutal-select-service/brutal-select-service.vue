@@ -59,6 +59,8 @@ export default defineComponent({
 .select-service {
   max-width: 300px;
   transition: color 1s;
+  margin-right: 100px;
+  margin-left: 100px;
   &:hover {
     color: $--color-apsidgray;
     font-family: KistyCC;
