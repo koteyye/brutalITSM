@@ -12,6 +12,8 @@ import {useRouter} from "vue-router";
 import {RoutesNames} from "@/shared";
 import brutalButton from "@/components/button/brutal-button.vue";
 import {v4 as uuid4} from 'uuid';
+import {useStore} from "vuex";
+import {useLocalStorage} from "@vueuse/core";
 
 export default defineComponent({
   name: "brutalTypeItem",
@@ -26,8 +28,16 @@ export default defineComponent({
   },
   setup(props) {
     const router = useRouter()
+    const store = useStore()
+    const typeId = useLocalStorage('TrablTypeId', '')
+    const typeName = useLocalStorage('TrablTypeName', '')
+    const needPCNumber = useLocalStorage('needPC', '')
 
     function createTrabl() {
+      store.dispatch('setSelectTypeTrabl', props.typeItem)
+      typeId.value = props.typeItem.trablTypeId
+      typeName.value = props.typeItem.trablTypeName
+      needPCNumber.value = props.typeItem.needPCNumber
       const id = uuid4(0x10)
       router.push({name: RoutesNames.CreateTrabl, params: {id: id}})
     }

@@ -61,61 +61,71 @@
               "trablTypeId": "5f2b351f-45d1-468e-b0f5-884cd4a833f4",
               "trablTypeName": "Сломался компуктер",
               "trablTypeDiscription": "Не работает компуктер и вы нихуя не понимаете почему. По статистике, большинство проблем с компуктером устраняется ребутом, передергиванием и ударом ного по системнику. Если вы даже на это неспособны, то этот трабл для Вас",
-              "trablTypeBlowJobId": "10492405-8c88-431f-a4ff-f0370687f970"
+              "trablTypeBlowJobId": "10492405-8c88-431f-a4ff-f0370687f970",
+              "needPCNumber": true
             },
             {
               "trablTypeId": "fd38eecd-fcb9-44fb-a2d6-d07efc8f5144",
               "trablTypeName": "Удалил интернет",
               "trablTypeDiscription": "Вы долбаеб, у которого просто не работает интернет, а вы думаете, что удалили его",
-              "trablTypeBlowJobId": "10492405-8c88-431f-a4ff-f0370687f970"
+              "trablTypeBlowJobId": "10492405-8c88-431f-a4ff-f0370687f970",
+              "needPCNumber": true
             },
             {
               "trablTypeId": "1a6c4589-386a-4191-97cd-866be94964d0",
               "trablTypeName": "Откусил шнур",
               "trablTypeDiscription": "Вы кривожопый утырок, который каким-то непонятным образом откусил шнур",
-              "trablTypeBlowJobId": "10492405-8c88-431f-a4ff-f0370687f970"
+              "trablTypeBlowJobId": "10492405-8c88-431f-a4ff-f0370687f970",
+              "needPCNumber": true
             },
             {
               "trablTypeId": "3a00171b-972e-459e-9949-caec61d7c517",
               "trablTypeName": "Не открывается PornHub",
               "trablTypeDiscription": "Вам стало скучно и одиноко ? Мы поможем",
-              "trablTypeBlowJobId": "10492405-8c88-431f-a4ff-f0370687f970"
+              "trablTypeBlowJobId": "10492405-8c88-431f-a4ff-f0370687f970",
+              "needPCNumber": true
             },
             {
               "trablTypeId": "485dde02-cf66-405a-a0f8-44cc4a8e155e",
               "trablTypeName": "Вынести мусор",
               "trablTypeDiscription": "Ты долбаеб ?",
-              "trablTypeBlowJobId": "10492405-8c88-431f-a4ff-f0370687f970"
+              "trablTypeBlowJobId": "10492405-8c88-431f-a4ff-f0370687f970",
+              "needPCNumber": false
             },
             {
               "trablTypeId": "8175bbc8-ca76-4fd5-b145-d60de0700e63",
               "trablTypeName": "Закончилась бумага (в принтере)",
               "trablTypeDiscription": "Обычно бумагу надо положить в специальный лоток в принтере, но если ты долбаеб, то возможно это сделаем и мы",
-              "trablTypeBlowJobId": "10492405-8c88-431f-a4ff-f0370687f970"
+              "trablTypeBlowJobId": "10492405-8c88-431f-a4ff-f0370687f970",
+              "needPCNumber": false
             },
             {
               "trablTypeId": "4c1de277-baf3-4612-af5c-f764453f4a3d",
               "trablTypeName": "Закончилась бумага (в туалете)",
               "trablTypeDiscription": "Можно взять из принтера",
-              "trablTypeBlowJobId": "10492405-8c88-431f-a4ff-f0370687f970"
+              "trablTypeBlowJobId": "10492405-8c88-431f-a4ff-f0370687f970",
+              "needPCNumber": false
             },
             {
               "trablTypeId": "d48c6425-8db7-4924-b645-3e2662ae43c5",
               "trablTypeName": "Я обосрался",
               "trablTypeDiscription": "Мы тоже",
-              "trablTypeBlowJobId": "10492405-8c88-431f-a4ff-f0370687f970"
+              "trablTypeBlowJobId": "10492405-8c88-431f-a4ff-f0370687f970",
+              "needPCNumber": false
             },
             {
               "trablTypeId": "2e915806-1aea-456b-a794-38e8f8be68a5",
               "trablTypeName": "Передернул (шнур)",
               "trablTypeDiscription": "А больше ты ничего не передернул ?",
-              "trablTypeBlowJobId": "10492405-8c88-431f-a4ff-f0370687f970"
+              "trablTypeBlowJobId": "10492405-8c88-431f-a4ff-f0370687f970",
+              "needPCNumber": false
             },
             {
               "trablTypeId": "cf3951ed-b805-4a89-8841-5a480b4e5201",
               "trablTypeName": "Передернул (не шнур)",
               "trablTypeDiscription": "Мы тоже",
-              "trablTypeBlowJobId": "10492405-8c88-431f-a4ff-f0370687f970"
+              "trablTypeBlowJobId": "10492405-8c88-431f-a4ff-f0370687f970",
+              "needPCNumber": false
             }
           ]
         },
@@ -127,13 +137,15 @@
               "trablTypeId": "cf40e91a-6ceb-4d39-9f01-094fdc945cd9",
               "trablTypeName": "Отвалился телефон",
               "trablTypeDiscription": "Пользуйся мобилой или мессенджером, нахуй тебе телефон ?",
-              "trablTypeBlowJobId": "25c14a29-c363-43b9-a0f5-593b6232d997"
+              "trablTypeBlowJobId": "25c14a29-c363-43b9-a0f5-593b6232d997",
+              "needPCNumber": false
             },
             {
               "trablTypeId": "6329a30a-e8b5-48d9-a59a-ff5d56fe4b47",
               "trablTypeName": "Висячие провода",
               "trablTypeDiscription": "Ну так поправь",
-              "trablTypeBlowJobId": "25c14a29-c363-43b9-a0f5-593b6232d997"
+              "trablTypeBlowJobId": "25c14a29-c363-43b9-a0f5-593b6232d997",
+              "needPCNumber": false
             }
           ]
         }

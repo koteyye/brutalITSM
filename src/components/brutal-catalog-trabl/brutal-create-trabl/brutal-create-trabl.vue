@@ -5,7 +5,7 @@
       <div class="brutal-create__fields">
         <div class="brutal-create__iniciator fields">
           <label class="brutal-create__iniciator-field-name text fieldname">Инициатор</label>
-          <input v-model="iniciator" class="brutal-create__iniciator-field fieldinput"/>
+          <span class="brutal-create__iniciator-field fieldinput fileddefault">{{userName}}</span>
         </div>
         <div class="brutal-create__interes fields">
           <label class="brutal-create__interes-field-name text fieldname" >Заинтересованное лицо</label>
@@ -13,9 +13,10 @@
         </div>
         <div class="brutal-create__typeTrabl fields">
           <label class="brutal-create__typeTrabl-field-name text fieldname">Тип трабла</label>
-          <input v-model="typeTrabl" class="brutal-create__typeTrabl-field fieldinput"/>
+          <span class="brutal-create__typeTrabl-field fieldinput fileddefault">{{typeItemName}}</span>
         </div>
-        <div class="brutal-create__compucter fields">
+        <div class="brutal-create__compucter fields"
+             v-if="needPCNumber === 'true'">
           <label class="brutal-create__compucter-field-name text fieldname">Номер компуктера</label>
           <input v-model="compucter" class="brutal-create__compucter-field fieldinput"/>
         </div>
@@ -41,16 +42,35 @@
 
 <script>
 import brutalButton from "@/components/button/brutal-button.vue";
-import {defineComponent} from "vue";
+import {defineComponent, onMounted, ref} from "vue";
+import {useLocalStorage} from "@vueuse/core";
+import {baseUrl} from "@/shared/path-names";
 
 export default defineComponent({
   name: "brutalCreateTrabl",
   components: {brutalButton},
   setup() {
 
+    const typeItemName = useLocalStorage('TrablTypeName', '')
+    const typeItemId = useLocalStorage('TrablTypeId', '')
+    const needPCNumber = useLocalStorage('needPC', '')
+
+    const userName = ref('')
+    const userId = ref('')
+
+    onMounted(async()=>await getUser())
+
+    async function getUser() {
+      const id = '54563a95-591b-4937-a9c0-0a16c48da30b'
+      const response = await fetch(`${baseUrl}/users?id=${id}`)
+      const userInfo = await response.json()
+      userName.value = userInfo[0].name
+      userId.value = userInfo[0].id
+    }
 
     return {
       //iniciator, interes, typeTrabl, compucter, locationn, pisanina
+      typeItemName, typeItemId, needPCNumber, userName
     }
   }
 })
@@ -98,6 +118,12 @@ export default defineComponent({
   padding-top: 5px;
   padding-bottom: 5px;
   background-color: $--color-apsidgray;
+}
+
+.fileddefault {
+  background-color: $--color-verygray;
+  text-align: left;
+  padding-left: 0px 20px;
 }
 
 .fieldname {
