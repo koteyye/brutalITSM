@@ -9,6 +9,7 @@ import './assets/styles/main.scss';
 import {Toaster} from '@meforma/vue-toaster';
 import {routes} from './routes'
 import {v4 as uuid4} from 'uuid';
+import vSelect from "vue-select"
 
 library.add(fas)
 
@@ -19,6 +20,7 @@ const init = async () => {
         .use(Toaster)
         .use(uuid4)
         .component('fa', FontAwesomeIcon)
+        .component('v-select', vSelect)
     await router.isReady()
     app.mount('#app')
 }

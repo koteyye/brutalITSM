@@ -1,7 +1,12 @@
 <template>
+  <div class="brutal-create__btnback">
+    <brutal-button icon="fa-solid fa-arrow-left" @click="clickBack"/>
+  </div>
   <div class="brutal-create__page">
     <div class="brutal-create__trabl-form">
-      <div class="brural-create__head text">Оформление трабла</div>
+        <div class="brutal-create__title">
+          <div class="brural-create__head text">Оформление трабла</div>
+        </div>
       <div class="brutal-create__fields">
         <div class="brutal-create__iniciator fields">
           <label class="brutal-create__iniciator-field-name text fieldname">Инициатор</label>
@@ -9,7 +14,13 @@
         </div>
         <div class="brutal-create__interes fields">
           <label class="brutal-create__interes-field-name text fieldname" >Заинтересованное лицо</label>
-          <input v-model="interes" class="brutal-create__interes-field fieldinput"/>
+<!--          <input-->
+<!--              type="text"-->
+<!--              v-model="interes"-->
+<!--              class="brutal-create__interes-field fieldinput"/>-->
+          <div class="brutal-create__interes-field">
+            <brutal-search/>
+          </div>
         </div>
         <div class="brutal-create__typeTrabl fields">
           <label class="brutal-create__typeTrabl-field-name text fieldname">Тип трабла</label>
@@ -45,18 +56,25 @@ import brutalButton from "@/components/button/brutal-button.vue";
 import {defineComponent, onMounted, ref} from "vue";
 import {useLocalStorage} from "@vueuse/core";
 import {baseUrl} from "@/shared/path-names";
+import {useRouter} from "vue-router";
+import {RoutesNames} from "@/shared";
+import brutalSearch from "@/components/brutal-search";
 
 export default defineComponent({
   name: "brutalCreateTrabl",
-  components: {brutalButton},
+  components: {
+    brutalButton, brutalSearch
+  },
   setup() {
-
+    const router = useRouter()
     const typeItemName = useLocalStorage('TrablTypeName', '')
     const typeItemId = useLocalStorage('TrablTypeId', '')
     const needPCNumber = useLocalStorage('needPC', '')
 
     const userName = ref('')
     const userId = ref('')
+
+    const users = ref([])
 
     onMounted(async()=>await getUser())
 
@@ -68,9 +86,19 @@ export default defineComponent({
       userId.value = userInfo[0].id
     }
 
+    async function getUsers() {
+      const response = await fetch(`${baseUrl}/users`)
+      const userInfo = await response.json()
+      console.log(userInfo.value)
+    }
+
+    function clickBack() {
+      router.push({name: RoutesNames.CatalogTrabl})
+    }
+
     return {
       //iniciator, interes, typeTrabl, compucter, locationn, pisanina
-      typeItemName, typeItemId, needPCNumber, userName
+      typeItemName, typeItemId, needPCNumber, userName, clickBack, users
     }
   }
 })
@@ -120,6 +148,7 @@ export default defineComponent({
   background-color: $--color-apsidgray;
 }
 
+
 .fileddefault {
   background-color: $--color-verygray;
   text-align: left;
@@ -140,6 +169,11 @@ textarea::placeholder {
 
 .brutal-create__btn {
   text-align: center;
+}
+
+.brutal-create__btnback {
+  margin-left: 20px;
+  margin-top: 20px
 }
 
 </style>
