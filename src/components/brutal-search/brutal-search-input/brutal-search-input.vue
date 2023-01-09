@@ -2,7 +2,7 @@
   <div class="brutal-search-input">
     <input
         type="text"
-        placeholder="Вводи ФИО"
+        placeholder="Вводи пользака"
         class="search-input"
         :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"
