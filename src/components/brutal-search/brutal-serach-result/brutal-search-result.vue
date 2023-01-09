@@ -26,7 +26,6 @@ export default defineComponent({
     }
   },
   setup(props) {
-    console.log(props.result)
   }
 })
 </script>

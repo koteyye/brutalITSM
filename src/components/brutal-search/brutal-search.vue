@@ -2,8 +2,11 @@
   <div class="brutal-search">
     <div class="input1">
      <brutal-search-input
-         v-model="query"
+         v-model.trim="query"
      />
+    </div>
+    <div class="selectedResult">
+
     </div>
     <div class="result1">
       <brutal-search-result
@@ -27,6 +30,8 @@ export default defineComponent({
     const query = ref('')
     const searchResult = ref([])
 
+    const isSearchInputFocused = false
+
     watch( ()=> query.value,
         async () => await search()
     )
@@ -44,7 +49,7 @@ export default defineComponent({
     }
 
     return {
-      searchResult, query
+      searchResult, query, isSearchInputFocused
     }
   }
 })
