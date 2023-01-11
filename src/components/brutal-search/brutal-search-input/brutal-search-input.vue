@@ -31,16 +31,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import '../../../assets/styles/main';
-  .close-search__btn {
-    top: 0;
-    right: 0;
-    height: 100%;
-    padding: 3px;
-    position: absolute;
-    &:focus {
-      outline: none;
-    }
-  }
 
   .search-input {
     border-radius: $radius*3;

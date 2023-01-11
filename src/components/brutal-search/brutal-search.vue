@@ -2,54 +2,87 @@
   <div class="brutal-search">
     <div class="input1">
      <brutal-search-input
+         v-show="Selected !== true"
          v-model.trim="query"
      />
     </div>
-    <div class="selectedResult">
-
+    <div class="brutal-search__selectedResult"
+         v-show="Selected">
+      {{Value}}
+      <div class="krestik">
+        <fa  icon="fa-solid fa-xmark" @click="clearSelected"/>
+      </div>
     </div>
     <div class="result1">
       <brutal-search-result
           :result="searchResult"
-      />
+          @values="selectedValue"/>
     </div>
   </div>
 </template>
 
 <script>
 import {defineComponent, ref, watch} from "vue";
-import brutalSearchInput from "@/components/brutal-search/brutal-search-input";
-import brutalSearchResult from "@/components/brutal-search/brutal-serach-result/brutal-search-result.vue";
+import brutalSearchResult from "@/components/brutal-search/brutal-search-result/brutal-search-result.vue";
 import BrutalSearchInput from "@/components/brutal-search/brutal-search-input/brutal-search-input.vue";
-import {baseUrl} from "@/shared/path-names";
 
 export default defineComponent({
   name: "BrutalSearch",
   components: {BrutalSearchInput, brutalSearchResult},
-  setup() {
+  props: {
+    searchResult: {
+      type: Array,
+      default() {
+        return []
+      }
+    }
+  },
+  emits: ['SearchRequest', 'selected'],
+  setup(props, {emit}) {
     const query = ref('')
-    const searchResult = ref([])
 
     const isSearchInputFocused = false
 
+    const Value = ref(null)
+    const Selected = ref(false)
+
+    const searchResultTrue = ref([])
+
     watch( ()=> query.value,
-        async () => await search()
+        () => search()
     )
 
-    async function search() {
-      const response = await fetch (`${baseUrl}/users?name_like=${query.value}`)
-      searchResult.value = await response.json()
-      if(query.value === '') {
-        clearSearchResult()
-      }
+    function search() {
+      emit('SearchRequest', query.value)
     }
 
-    function clearSearchResult() {
-      searchResult.value = ''
+    watch(() => props.searchResult,
+         () => writeResult())
+
+    function writeResult() {
+      searchResultTrue.value = props.searchResult
+    }
+
+    function clearQuery() {
+      query.value = ''
+    }
+
+    function selectedValue(values) {
+      Value.value = values.name
+      Selected.value = true
+      console.log(Selected.value)
+      emit('selected', Selected.value)
+      clearQuery()
+    }
+
+    function clearSelected() {
+      Value.value = null
+      Selected.value = false
+      emit('selected', Selected.value)
     }
 
     return {
-      searchResult, query, isSearchInputFocused
+      query, isSearchInputFocused, selectedValue, Value, Selected, clearSelected
     }
   }
 })
@@ -61,7 +94,26 @@ export default defineComponent({
     position: relative;
     display: flex;
     width: 100%;
+
+    &__selectedResult {
+      display: flex;
+      border-radius: $radius*3;
+      padding-left: 20px;
+      font-family: KistyCC;
+      font-size: 24px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      width: 433px;
+      background-color: $--color-apsidgray;
+      z-index: 1;
+      text-align: left;
+      justify-content: space-between;
+      padding-right: 20px;
+      height: 30px;
+    }
   }
+
+
 
 .input1 {
   z-index: 2;

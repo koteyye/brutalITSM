@@ -1,12 +1,14 @@
 <template>
   <div class="brutal-search-result"
-       v-if="result.length!==0"
+       v-show="result.length !== 0"
   >
     <ul>
       <li
-          v-for="(user, index) in result"
+          class="cursor-pointer"
+          v-for="(values, index) in result"
           :key="index"
-      >{{user.name}}</li>
+          @click="handleClickResult(values)"
+      >{{values.name}}</li>
     </ul>
   </div>
 </template>
@@ -23,9 +25,17 @@ export default defineComponent({
       default() {
         return []
       }
-    }
+    },
   },
-  setup(props) {
+  emits: ['values'],
+  setup(props, {emit}) {
+    console.log(props.result)
+    function handleClickResult(value) {
+      emit('values', value)
+    }
+    return {
+      handleClickResult
+    }
   }
 })
 </script>

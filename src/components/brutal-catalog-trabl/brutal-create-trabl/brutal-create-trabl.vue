@@ -19,7 +19,11 @@
 <!--              v-model="interes"-->
 <!--              class="brutal-create__interes-field fieldinput"/>-->
           <div class="brutal-create__interes-field">
-            <brutal-search/>
+            <brutal-search
+                :search-result="searchResult"
+                @searchRequest="EnterQuery"
+                @selected="EnterSelected"
+            />
           </div>
         </div>
         <div class="brutal-create__typeTrabl fields">
@@ -53,7 +57,7 @@
 
 <script>
 import brutalButton from "@/components/button/brutal-button.vue";
-import {defineComponent, onMounted, ref} from "vue";
+import {defineComponent, onMounted, ref, watch} from "vue";
 import {useLocalStorage} from "@vueuse/core";
 import {baseUrl} from "@/shared/path-names";
 import {useRouter} from "vue-router";
@@ -76,6 +80,14 @@ export default defineComponent({
 
     const users = ref([])
 
+    //Переменные для поиска
+    const query = ref('')
+    const searchResult = ref([])
+    const clearSearchResult = ref(false)
+    //__________________________
+
+    console.log(query.value)
+
     onMounted(async()=>await getUser())
 
     async function getUser() {
@@ -86,11 +98,41 @@ export default defineComponent({
       userId.value = userInfo[0].id
     }
 
-    async function getUsers() {
-      const response = await fetch(`${baseUrl}/users`)
-      const userInfo = await response.json()
-      console.log(userInfo.value)
+
+    //Функции и вотчеры для поиска!
+    function EnterQuery(request) {
+      query.value = request
     }
+
+    watch(() => query.value,
+        async () => searchUser())
+
+    async function searchUser() {
+      if (query.value !== '') {
+        const response = await fetch(`${baseUrl}/users?name_like=${query.value}`)
+        searchResult.value = await response.json()
+      }
+    }
+
+    function EnterSelected(selected) {
+      clearSearchResult.value = selected
+    }
+
+    watch(()=>clearSearchResult.value,
+        ()=>clearResult())
+
+    function clearResult() {
+      searchResult.value = []
+    }
+    //.............................
+
+
+
+    // async function getUsers() {
+    //   const response = await fetch(`${baseUrl}/users`)
+    //   const userInfo = await response.json()
+    //   console.log(userInfo.value)
+    // }
 
     function clickBack() {
       router.push({name: RoutesNames.CatalogTrabl})
@@ -98,7 +140,7 @@ export default defineComponent({
 
     return {
       //iniciator, interes, typeTrabl, compucter, locationn, pisanina
-      typeItemName, typeItemId, needPCNumber, userName, clickBack, users
+      typeItemName, typeItemId, needPCNumber, userName, clickBack, users, query, searchResult, EnterQuery, EnterSelected
     }
   }
 })
