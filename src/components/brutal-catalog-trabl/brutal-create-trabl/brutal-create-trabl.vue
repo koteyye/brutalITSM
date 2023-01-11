@@ -43,8 +43,11 @@
           <label class="brutal-create__pisanina-field-name text fieldname">Подробное описание трабла</label>
           <textarea v-model="pisanina" placeholder="Максимально подробно пиши о своем трабле" class="brutal-create__pisanina-field fieldinput"/>
         </div>
-        <div class="brutal-create__prufs">
-    <!--        Сюда лоэдер-->
+        <div class="brutal-create__prufs fields">
+          <label class="brutal-create__prufs-field-name text fieldname">Пруфы</label>
+          <div class="loadfield">
+            <brutal-uploader/>
+          </div>
         </div>
         <div class="brutal-create__btn">
           <brutal-button label="Отправить эту хуйню"/>
@@ -63,11 +66,12 @@ import {baseUrl} from "@/shared/path-names";
 import {useRouter} from "vue-router";
 import {RoutesNames} from "@/shared";
 import brutalSearch from "@/components/brutal-search";
+import brutalUploader from "@/components/brutal-uploader";
 
 export default defineComponent({
   name: "brutalCreateTrabl",
   components: {
-    brutalButton, brutalSearch
+    brutalButton, brutalSearch, brutalUploader
   },
   setup() {
     const router = useRouter()
@@ -176,6 +180,11 @@ export default defineComponent({
 
 .fields {
   text-align: center;
+  display: flex;
+}
+
+.loadfield {
+  text-align: left;
   display: flex;
 }
 
