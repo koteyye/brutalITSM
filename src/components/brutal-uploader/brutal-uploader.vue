@@ -47,7 +47,8 @@
 </template>
 
 <script>
-import {defineComponent, ref, toRefs, PropType} from "vue";
+import {defineComponent, ref, toRefs} from "vue";
+import {useToast} from "vue-toastification";
 
 export default defineComponent({
   name: "brutalUploader",
@@ -60,7 +61,7 @@ export default defineComponent({
   emits: ['update:modelValue'],
   setup(props, {emit}) {
     const {modelValue} = toRefs(props)
-
+    const toast = useToast()
 
     const input = ref('')
 
@@ -78,6 +79,7 @@ export default defineComponent({
         else {
           errorMessage.value = 'Ты бы претормозил'
           isError.value = true
+          getToast(errorMessage)
         }
       }
       if(input.value) {
@@ -89,6 +91,13 @@ export default defineComponent({
 
     function removeFile(index) {
       emit('update:modelValue', modelValue.value.filter((p, i) => i !== index))
+    }
+
+    function getToast(errorMessage) {
+      toast.error(errorMessage.value, {
+        timeout: 2000
+      })
+
     }
 
     return {
