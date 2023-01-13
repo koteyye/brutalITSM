@@ -29,7 +29,6 @@ export default defineComponent({
   },
   emits: ['values'],
   setup(props, {emit}) {
-    console.log(props.result)
     function handleClickResult(value) {
       emit('values', value)
     }

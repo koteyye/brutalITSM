@@ -1,22 +1,15 @@
 <template>
   <div class="brutal-search">
     <div class="input1">
-     <brutal-search-input
-         v-show="Selected !== true"
-         v-model.trim="query"
-     />
-    </div>
-    <div class="brutal-search__selectedResult"
-         v-show="Selected">
-      {{Value}}
-      <div class="krestik">
-        <fa  icon="fa-solid fa-xmark" @click="clearSelected"/>
-      </div>
+      <brutal-search-input
+          v-model:query="query"
+          v-model:selected-value="selectedValue"
+      />
     </div>
     <div class="result1">
       <brutal-search-result
           :result="searchResult"
-          @values="selectedValue"/>
+          @values="onSelectedValue"/>
     </div>
   </div>
 </template>
@@ -37,52 +30,39 @@ export default defineComponent({
       }
     }
   },
-  emits: ['SearchRequest', 'selected'],
+  emits: ['update:search-result','SearchRequest', 'selected'],
   setup(props, {emit}) {
     const query = ref('')
-
     const isSearchInputFocused = false
-
-    const Value = ref(null)
+    const selectedValue = ref(null)
     const Selected = ref(false)
-
     const searchResultTrue = ref([])
-
     watch( ()=> query.value,
         () => search()
     )
-
     function search() {
       emit('SearchRequest', query.value)
     }
-
     watch(() => props.searchResult,
-         () => writeResult())
-
+        () => writeResult())
     function writeResult() {
       searchResultTrue.value = props.searchResult
     }
-
     function clearQuery() {
       query.value = ''
     }
-
-    function selectedValue(values) {
-      Value.value = values.name
-      Selected.value = true
-      console.log(Selected.value)
-      emit('selected', Selected.value)
+    function onSelectedValue(values) {
+      selectedValue.value = values.name
+      emit('update:search-result', [])
       clearQuery()
     }
-
     function clearSelected() {
-      Value.value = null
+      selectedValue.value = null
       Selected.value = false
-      emit('selected', Selected.value)
+      emit('update:search-result', [])
     }
-
     return {
-      query, isSearchInputFocused, selectedValue, Value, Selected, clearSelected
+      query, isSearchInputFocused, onSelectedValue, selectedValue, Selected, clearSelected
     }
   }
 })
@@ -90,31 +70,12 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import '../../assets/styles/main';
-  .brutal-search {
-    position: relative;
-    display: flex;
-    width: 100%;
+.brutal-search {
+  position: relative;
+  display: flex;
+  width: 100%;
 
-    &__selectedResult {
-      display: flex;
-      border-radius: $radius*3;
-      padding-left: 20px;
-      font-family: KistyCC;
-      font-size: 24px;
-      padding-top: 5px;
-      padding-bottom: 5px;
-      width: 433px;
-      background-color: $--color-apsidgray;
-      z-index: 1;
-      text-align: left;
-      justify-content: space-between;
-      padding-right: 20px;
-      height: 30px;
-    }
-  }
-
-
-
+}
 .input1 {
   z-index: 2;
 }

@@ -4,9 +4,9 @@
   </div>
   <div class="brutal-create__page">
     <div class="brutal-create__trabl-form">
-        <div class="brutal-create__title">
-          <div class="brural-create__head text">Оформление трабла</div>
-        </div>
+      <div class="brutal-create__title">
+        <div class="brural-create__head text">Оформление трабла</div>
+      </div>
       <div class="brutal-create__fields">
         <div class="brutal-create__iniciator fields">
           <label class="brutal-create__iniciator-field-name text fieldname">Инициатор</label>
@@ -14,15 +14,14 @@
         </div>
         <div class="brutal-create__interes fields">
           <label class="brutal-create__interes-field-name text fieldname" >Заинтересованное лицо</label>
-<!--          <input-->
-<!--              type="text"-->
-<!--              v-model="interes"-->
-<!--              class="brutal-create__interes-field fieldinput"/>-->
+          <!--          <input-->
+          <!--              type="text"-->
+          <!--              v-model="interes"-->
+          <!--              class="brutal-create__interes-field fieldinput"/>-->
           <div class="brutal-create__interes-field">
             <brutal-search
-                :search-result="searchResult"
-                @searchRequest="EnterQuery"
-                @selected="EnterSelected"
+                v-model:search-result="searchResult"
+                @searchRequest="onQuery"
             />
           </div>
         </div>
@@ -46,11 +45,16 @@
         <div class="brutal-create__prufs fields">
           <label class="brutal-create__prufs-field-name text fieldname">Пруфы</label>
           <div class="loadfield">
-            <brutal-uploader/>
+            <brutal-uploader
+                v-model:model-value="loadFiles"
+            />
           </div>
         </div>
-        <div class="brutal-create__btn">
-          <brutal-button label="Отправить эту хуйню"/>
+        <div
+            class="brutal-create-btn"
+            :class="{'brutal-create-btn__non-file': loadFiles.length !== 0}"
+        >
+          <brutal-button label="Отправить эту х уйню"/>
         </div>
       </div>
 
@@ -84,6 +88,11 @@ export default defineComponent({
 
     const users = ref([])
 
+    const loadFiles = ref([])
+
+    watch(() => loadFiles.value,
+    async () => console.log(loadFiles.value))
+
     //Переменные для поиска
     const query = ref('')
     const searchResult = ref([])
@@ -104,7 +113,7 @@ export default defineComponent({
 
 
     //Функции и вотчеры для поиска!
-    function EnterQuery(request) {
+    function onQuery(request) {
       query.value = request
     }
 
@@ -118,9 +127,6 @@ export default defineComponent({
       }
     }
 
-    function EnterSelected(selected) {
-      clearSearchResult.value = selected
-    }
 
     watch(()=>clearSearchResult.value,
         ()=>clearResult())
@@ -128,15 +134,7 @@ export default defineComponent({
     function clearResult() {
       searchResult.value = []
     }
-    //.............................
 
-
-
-    // async function getUsers() {
-    //   const response = await fetch(`${baseUrl}/users`)
-    //   const userInfo = await response.json()
-    //   console.log(userInfo.value)
-    // }
 
     function clickBack() {
       router.push({name: RoutesNames.CatalogTrabl})
@@ -144,7 +142,7 @@ export default defineComponent({
 
     return {
       //iniciator, interes, typeTrabl, compucter, locationn, pisanina
-      typeItemName, typeItemId, needPCNumber, userName, clickBack, users, query, searchResult, EnterQuery, EnterSelected
+      typeItemName, typeItemId, needPCNumber, userName, clickBack, users, query, searchResult, onQuery, loadFiles
     }
   }
 })
@@ -158,12 +156,19 @@ export default defineComponent({
   text-align: -webkit-center;
 }
 
+.brural-create__head {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  font-size: 30px;
+}
+
 .brutal-create__trabl-form {
   margin-top: 30px;
   padding: 0px 20px;
   border: solid 1px $--color-apsidgray;
   max-width: 1000px;
   margin-left: 20px;
+  height: min(1060px);
 }
 
 .brural-create__head {
@@ -203,7 +208,10 @@ export default defineComponent({
 .fileddefault {
   background-color: $--color-verygray;
   text-align: left;
-  padding-left: 0px 20px;
+  padding-left: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 2px;
 }
 
 .fieldname {
@@ -218,9 +226,17 @@ textarea::placeholder {
   color: #bcc0bc;
 }
 
-.brutal-create__btn {
+.brutal-create-btn {
   text-align: center;
+  margin: 110px;
+  &__non-file {
+    margin-top: 0;
+  }
 }
+
+
+
+
 
 .brutal-create__btnback {
   margin-left: 20px;

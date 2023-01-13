@@ -1,19 +1,8 @@
 <template>
   <div class="brutal-uploader">
-    <div class="brutal-uploader__wrapper">
-      <label for="loader" class="btn__load">Загрузить</label>
-      <input
-          ref="input"
-          id="loader"
-          type="file"
-          style="display: none"
-          @change="uploadFile"
-      >
-    </div>
     <div class="brutal-uploader__dragload"
          :class="{ 'brutal-uploader__dragload--drag': isDragStart}"
     >
-
       <input
           class="brutal-uploader__input"
           ref="input"
@@ -24,7 +13,7 @@
           @dragenter="isDragStart = true"
           @dragleave="isDragStart = false"
       >
-      {{ isDragStart ? '' : 'Или перенеси файл сюда'}}
+      {{ isDragStart ? '' : 'Нажать для загрузки или перенести файл'}}
       <img
         v-show="isDragStart"
         src="/image/1801287.svg"
@@ -36,7 +25,7 @@
     </div>
     <div class="brutal-uploader__preview">
       <div
-           v-for="(image, index) in files"
+           v-for="(image, index) in modelValue"
            :key="index"
            class="brutal-uploader__previewItem"
            >
@@ -58,16 +47,22 @@
 </template>
 
 <script>
-import {defineComponent, ref} from "vue";
+import {defineComponent, ref, toRefs, PropType} from "vue";
 
 export default defineComponent({
   name: "brutalUploader",
-  components: {},
-  props: {},
-  emits: [],
-  setup() {
+  props: {
+    modelValue: {
+      type: Array,
+      required: true
+    }
+  },
+  emits: ['update:modelValue'],
+  setup(props, {emit}) {
+    const {modelValue} = toRefs(props)
+
+
     const input = ref('')
-    const files = ref([])
 
     const errorMessage = ref(null)
     const isError = ref(false)
@@ -76,8 +71,9 @@ export default defineComponent({
 
     function uploadFile(event) {
       if(event.target.files) {
-        if(files.value.length < 5) {
-          files.value = [...files.value, ...Array.from(event.target.files)]
+
+        if(modelValue.value.length < 5) {
+          emit('update:modelValue', [...modelValue.value, ...Array.from(event.target.files)])
         }
         else {
           errorMessage.value = 'Ты бы претормозил'
@@ -87,17 +83,16 @@ export default defineComponent({
       if(input.value) {
         input.value.value = ''
       }
-
       isDragStart.value = false
     }
     const getSrc = (image) => URL.createObjectURL(image)
 
     function removeFile(index) {
-      files.value = files.value.filter((p, i) => i !== index)
+      emit('update:modelValue', modelValue.value.filter((p, i) => i !== index))
     }
 
     return {
-      uploadFile, files, getSrc, input, removeFile, isDragStart
+      uploadFile, getSrc, input, removeFile, isDragStart
     }
   }
 })
@@ -110,7 +105,7 @@ export default defineComponent({
     position: relative;
     text-align: center;
     height: 150px;
-    weight: 200px;
+    width: 250px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -119,6 +114,7 @@ export default defineComponent({
     margin-top: 10px;
     color: $--color-main;
     font-family: "Mrs Onion Monsters";
+    font-size: 14px;
     letter-spacing: 3px;
     padding: 20px;
     background-color: rgba(#006A72, 0.5);
@@ -127,7 +123,6 @@ export default defineComponent({
   .brutal-uploader__input {
     position: absolute;
     height: 150px;
-    weight: 200px;
     z-index: 2;
     top: 0;
     right: 0;
@@ -160,7 +155,7 @@ export default defineComponent({
     transition: .2s;
     font-weight: 500;
     font-family: "Mrs Onion Monsters";
-    font-size: 21px;
+    font-size: 16px;
     line-height: 21px;
     position: relative;
     left: 0;
