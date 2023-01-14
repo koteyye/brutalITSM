@@ -108,7 +108,6 @@ export default defineComponent({
       filesLimit.value = true
       toast.error("5 пруфов более, чем достаточно", {
         position: POSITION.BOTTOM_CENTER,
-        closeButton: true,
         timeout: 2000,
       })
     }

@@ -125,7 +125,6 @@ export default defineComponent({
           errorMessage.value = `Дохуя файлов, можно не более ${props.limitCount}`,
           toast.error(`${errorMessage.value}`,{
             position: POSITION.BOTTOM_CENTER,
-            closeButton: true,
             timeout: 2000,
           })
       )
