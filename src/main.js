@@ -10,7 +10,7 @@ import {Toaster} from '@meforma/vue-toaster';
 import {routes} from './routes'
 import {v4 as uuid4} from 'uuid';
 import Toast from "vue-toastification"
-import "vue-toastification/dist/index.css"
+import "./assets/styles/toast.scss"
 
 library.add(fas)
 
@@ -21,7 +21,7 @@ const init = async () => {
         .use(store)
         .use(Toaster)
         .use(uuid4)
-        .use(Toast)
+        .use(Toast, {icon: false, hideProgressBar: true})
         .component('fa', FontAwesomeIcon)
     await router.isReady()
     app.mount('#app')

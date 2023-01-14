@@ -67,6 +67,7 @@ export default defineComponent( {
   top: 0;
   display: flex;
   background: $--color-headerbg;
+  box-shadow: 10px 10px 40px 40px $--color-headerbg;
 
   &__logo {
     display: grid;

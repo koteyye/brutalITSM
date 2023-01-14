@@ -48,7 +48,7 @@
 
 <script>
 import {defineComponent, ref, toRefs} from "vue";
-import {useToast} from "vue-toastification";
+import {POSITION, useToast} from "vue-toastification";
 
 export default defineComponent({
   name: "brutalUploader",
@@ -77,7 +77,7 @@ export default defineComponent({
           emit('update:modelValue', [...modelValue.value, ...Array.from(event.target.files)])
         }
         else {
-          errorMessage.value = 'Ты бы претормозил'
+          errorMessage.value = 'Слишком дохуя пруфов'
           isError.value = true
           getToast(errorMessage)
         }
@@ -95,7 +95,9 @@ export default defineComponent({
 
     function getToast(errorMessage) {
       toast.error(errorMessage.value, {
-        timeout: 2000
+        timeout: 2000,
+        position: POSITION.BOTTOM_CENTER,
+        closeButton: true,
       })
 
     }

@@ -61,6 +61,7 @@ export default  defineComponent({
 img {
   border-radius: $radius*5;
   max-height: 800px;
+  width: min(800px);
 }
 
 .row {

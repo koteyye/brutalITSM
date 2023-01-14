@@ -25,6 +25,9 @@ export default {
   flex-direction: column;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: url("@/../public/image/5137894.jpg") 50%/ cover
+  border-box
+  padding-box;
 }
 
 </style>
