@@ -49,6 +49,7 @@
                 v-model:model-value="loadFiles"
                 :acceptFile = "acceptFiles"
                 :is-disabled = "filesLimit"
+                :limit-count = "5"
             />
           </div>
         </div>

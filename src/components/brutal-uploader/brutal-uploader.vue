@@ -4,7 +4,7 @@
          :class="[{ 'brutal-uploader__dragload--drag': isDragStart}, {'brutal-uploader__isDisabled': isDisabled}]"
     >
       <input
-          class="brutal-uploader__input"
+          :class="[{ 'brutal-uploader__input cursor-pointer' : isDisabled === false}, { 'brutal-uploader__input': isDisabled }]"
           ref="input"
           id="dragger"
           :accept=acceptFile
@@ -56,6 +56,7 @@
 
 <script>
 import {computed, defineComponent, ref, toRefs, watch} from "vue";
+import {POSITION, useToast} from "vue-toastification";
 
 export default defineComponent({
   name: "brutalUploader",
@@ -79,6 +80,10 @@ export default defineComponent({
     isDisabled: {
       type: Boolean,
       default: false
+    },
+    limitCount: {
+      type: Number,
+      default: 10
     }
   },
   emits: ['update:modelValue'],
@@ -86,6 +91,7 @@ export default defineComponent({
     const {modelValue} = toRefs(props)
     const input = ref('')
 
+    const toast = useToast()
     const errorMessage = ref(null)
     const isError = ref(false)
 
@@ -112,9 +118,17 @@ export default defineComponent({
     }
 
     function handleInput(event) {
-      if(event.target.files) {
+      if(event.target.files && event.target.files.length <= props.limitCount) {
         emit('update:modelValue', [...modelValue.value, ...Array.from(event.target.files)])
       }
+      else (
+          errorMessage.value = `Дохуя файлов, можно не более ${props.limitCount}`,
+          toast.error(`${errorMessage.value}`,{
+            position: POSITION.BOTTOM_CENTER,
+            closeButton: true,
+            timeout: 2000,
+          })
+      )
       if(input.value) {
         input.value.value = ''
       }
@@ -195,7 +209,6 @@ export default defineComponent({
     height: 40px;
     border-radius: 7px;
     border: none;
-    cursor: pointer;
     transition: .2s;
     font-weight: 500;
     font-family: "Mrs Onion Monsters";
