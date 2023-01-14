@@ -1,27 +1,35 @@
 <template>
   <div class="brutal-uploader">
     <div class="brutal-uploader__dragload"
-         :class="{ 'brutal-uploader__dragload--drag': isDragStart}"
+         :class="[{ 'brutal-uploader__dragload--drag': isDragStart}, {'brutal-uploader__isDisabled': isDisabled}]"
     >
       <input
           class="brutal-uploader__input"
           ref="input"
           id="dragger"
+          :accept=acceptFile
+          :disabled="isDisabled"
           type="file"
           multiple
-          @change="uploadFile"
+          @change="handleInput"
           @dragenter="isDragStart = true"
           @dragleave="isDragStart = false"
       >
-      {{ isDragStart ? '' : 'Нажать для загрузки или перенести файл'}}
+      {{ isDragStart ? '' : isDisabled ? '' :'Нажать для загрузки или перенести файл'}}
       <img
         v-show="isDragStart"
-        src="/image/1801287.svg"
+        src="../../assets/image/1801287.svg"
         alt="Грузи"
         height="150"
         width="334"
-
       >
+      <img
+        v-show="isDisabled"
+        src="../../assets/image/penis-svgrepo-com.svg"
+        alt="Все"
+        height="150"
+        width="334"
+        >
     </div>
     <div class="brutal-uploader__preview">
       <div
@@ -47,22 +55,35 @@
 </template>
 
 <script>
-import {defineComponent, ref, toRefs} from "vue";
-import {POSITION, useToast} from "vue-toastification";
+import {computed, defineComponent, ref, toRefs, watch} from "vue";
 
 export default defineComponent({
   name: "brutalUploader",
   props: {
     modelValue: {
-      type: Array,
+      type: [File],
       required: true
+    },
+    acceptFile: {
+      type: String,
+      default: ''
+    },
+    error: {
+      type: String,
+      default: ''
+    },
+    sizeLimit: {
+      type: [Number, String],
+      default: null
+    },
+    isDisabled: {
+      type: Boolean,
+      default: false
     }
   },
   emits: ['update:modelValue'],
   setup(props, {emit}) {
     const {modelValue} = toRefs(props)
-    const toast = useToast()
-
     const input = ref('')
 
     const errorMessage = ref(null)
@@ -70,17 +91,29 @@ export default defineComponent({
 
     const isDragStart = ref(false)
 
-    function uploadFile(event) {
-      if(event.target.files) {
 
-        if(modelValue.value.length < 5) {
-          emit('update:modelValue', [...modelValue.value, ...Array.from(event.target.files)])
+    const filedByType = ref(Array<File>([]))
+    const filedBySize = ref(Array<File>([]))
+    const exceededError = ref(false)
+
+    const types = computed(() => props.acceptFile?.split(',').map((el) => el.replace('.', ''). trim()))
+
+
+    watch(() => props.modelValue,
+        (newVal, oldVal) => {
+      if (newVal !== oldVal && newVal === '') clearErrors
         }
-        else {
-          errorMessage.value = 'Слишком дохуя пруфов'
-          isError.value = true
-          getToast(errorMessage)
-        }
+    )
+
+    function clearErrors() {
+      filedByType.value = []
+      filedBySize.value = []
+      exceededError.value = false
+    }
+
+    function handleInput(event) {
+      if(event.target.files) {
+        emit('update:modelValue', [...modelValue.value, ...Array.from(event.target.files)])
       }
       if(input.value) {
         input.value.value = ''
@@ -89,21 +122,14 @@ export default defineComponent({
     }
     const getSrc = (image) => URL.createObjectURL(image)
 
+
+
     function removeFile(index) {
       emit('update:modelValue', modelValue.value.filter((p, i) => i !== index))
     }
 
-    function getToast(errorMessage) {
-      toast.error(errorMessage.value, {
-        timeout: 2000,
-        position: POSITION.BOTTOM_CENTER,
-        closeButton: true,
-      })
-
-    }
-
     return {
-      uploadFile, getSrc, input, removeFile, isDragStart
+      handleInput, getSrc, input, removeFile, isDragStart
     }
   }
 })
@@ -146,6 +172,13 @@ export default defineComponent({
   .brutal-uploader__dragload--drag {
     color: rgba(#fff, 0);
     border-color: $--color-main;
+  }
+
+  .brutal-uploader__isDisabled {
+    color: rgba(#fff, 0);
+    border-color: $--color-main;
+    background-color: $--color-huy;
+    box-shadow: 2px 2px 5px 10px $--color-huy;
   }
 
   .brutal-uploader__icon {

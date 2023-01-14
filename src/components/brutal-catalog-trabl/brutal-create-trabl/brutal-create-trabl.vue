@@ -47,6 +47,8 @@
           <div class="loadfield">
             <brutal-uploader
                 v-model:model-value="loadFiles"
+                :acceptFile = "acceptFiles"
+                :is-disabled = "filesLimit"
             />
           </div>
         </div>
@@ -71,6 +73,7 @@ import {useRouter} from "vue-router";
 import {RoutesNames} from "@/shared";
 import brutalSearch from "@/components/brutal-search";
 import brutalUploader from "@/components/brutal-uploader";
+import {POSITION, useToast} from "vue-toastification";
 
 export default defineComponent({
   name: "brutalCreateTrabl",
@@ -82,7 +85,7 @@ export default defineComponent({
     const typeItemName = useLocalStorage('TrablTypeName', '')
     const typeItemId = useLocalStorage('TrablTypeId', '')
     const needPCNumber = useLocalStorage('needPC', '')
-
+    const toast = useToast()
     const userName = ref('')
     const userId = ref('')
 
@@ -90,8 +93,24 @@ export default defineComponent({
 
     const loadFiles = ref([])
 
+    const acceptFiles = ref('.jpeg, .jpg, .png')
+
+    const filesLimit = ref(false)
+
     watch(() => loadFiles.value,
-    async () => console.log(loadFiles.value))
+        (value) => {
+      if(value.length > 4) setFilesLimit()
+          else filesLimit.value = false
+    })
+
+    function setFilesLimit() {
+      filesLimit.value = true
+      toast.error("5 пруфов более, чем достаточно", {
+        position: POSITION.BOTTOM_CENTER,
+        closeButton: true,
+        timeout: 2000,
+      })
+    }
 
     //Переменные для поиска
     const query = ref('')
@@ -142,7 +161,7 @@ export default defineComponent({
 
     return {
       //iniciator, interes, typeTrabl, compucter, locationn, pisanina
-      typeItemName, typeItemId, needPCNumber, userName, clickBack, users, query, searchResult, onQuery, loadFiles
+      typeItemName, typeItemId, needPCNumber, userName, clickBack, users, query, searchResult, onQuery, loadFiles, acceptFiles, filesLimit
     }
   }
 })
