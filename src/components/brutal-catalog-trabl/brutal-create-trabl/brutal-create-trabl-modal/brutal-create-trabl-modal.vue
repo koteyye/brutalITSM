@@ -25,19 +25,22 @@ export default defineComponent(
     {
       name: "brutalCreateTrablModal",
       components: {BrutalModal, brutalButton},
-      emits: ['toastMessage'],
+      emits: ['modalResponse'],
       setup(props, {emit} ) {
         const router = useRouter()
-        const toastMessage = ref('')
 
         function handleRoutMainPage() {
-          toastMessage.value = 'Ты великолепен! Мы очень рады, что ты воспользовался нашим сервисом!'
-          emit('toastMessage', toastMessage.value)
-          router.push({name: RoutesNames.Main})
+          var modalResponse = new Object()
+          modalResponse.toastMessage = 'Ты великолепен! Мы очень рады, что ты воспользовался нашим сервисом!'
+          modalResponse.confirmTrabl = false
+          emit('modalResponse', modalResponse)
         }
 
         async function handleCreateTrabl() {
-
+          var modalResponse = new Object()
+          modalResponse.toastMessage = 'Мы и не сомневались, что ты такой! Трабл зарегистрирован'
+          modalResponse.confirmTrabl = true
+          emit('modalResponse', modalResponse)
         }
 
         return {

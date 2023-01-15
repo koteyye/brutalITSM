@@ -61,7 +61,7 @@
         </div>
       </div>
       <div class="brutal-create-trabl-modal">
-        <brutal-create-trabl-modal v-if="showModal" @close="handleClose" @toastMessage="onToastModal"/>
+        <brutal-create-trabl-modal v-if="showModal" @close="handleClose" @modalResponse="modalResponse"/>
       </div>
     </div>
   </div>
@@ -104,6 +104,8 @@ export default defineComponent({
 
     const showModal = ref(false)
 
+    const confirmModal = ref(false)
+
     watch(() => loadFiles.value,
         (value) => {
       if(value.length > 4) setFilesLimit()
@@ -124,7 +126,6 @@ export default defineComponent({
     const clearSearchResult = ref(false)
     //__________________________
 
-    console.log(query.value)
 
     onMounted(async()=>await getUser())
 
@@ -169,14 +170,34 @@ export default defineComponent({
       showModal.value = false
     }
 
-    function onToastModal(toastMessage) {
-      toast.info(`${toastMessage}`, {
+    function onConfirm() {
+
+    }
+
+    function modalResponse(modalResponse) {
+      console.log()
+      if(modalResponse.confirmTrabl === false) {
+        toast.info(`${modalResponse.toastMessage}`, {
+          timeout: 2000,
+          closeButton: false,
+          position: POSITION.BOTTOM_CENTER
+        })
+        showModal.value = false
+        router.push({name: RoutesNames.Main})
+      }
+      else {
+        onCreateTrabl(modalResponse)
+      }
+    }
+
+    async function onCreateTrabl(modalResponse) {
+      toast.error(`${modalResponse.toastMessage}`, {
         timeout: 2000,
         closeButton: false,
         position: POSITION.BOTTOM_CENTER
       })
+      showModal.value = false
     }
-
     function clickBack() {
       router.push({name: RoutesNames.CatalogTrabl})
     }
@@ -204,7 +225,8 @@ export default defineComponent({
       showModal,
       createTrabl,
       handleClose,
-      onToastModal
+      modalResponse,
+      onConfirm
     }
   }
 })
