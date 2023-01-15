@@ -32,7 +32,7 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const serviceLogo = computed(()=> `/image/${props.service.image}`)
+    const serviceLogo = computed(()=> `/images/${props.service.image}`)
     const router = useRouter()
 
     function serviceClick() {

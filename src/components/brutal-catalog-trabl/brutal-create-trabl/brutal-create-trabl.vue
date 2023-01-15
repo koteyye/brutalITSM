@@ -57,10 +57,12 @@
             class="brutal-create-btn"
             :class="{'brutal-create-btn__non-file': loadFiles.length !== 0}"
         >
-          <brutal-button label="Отправить эту х уйню"/>
+          <brutal-button label="Отправить эту хуйню" @click="createTrabl"/>
         </div>
       </div>
-
+      <div class="brutal-create-trabl-modal">
+        <brutal-create-trabl-modal v-if="showModal" @close="handleClose" @toastMessage="onToastModal"/>
+      </div>
     </div>
   </div>
 </template>
@@ -74,12 +76,14 @@ import {useRouter} from "vue-router";
 import {RoutesNames} from "@/shared";
 import brutalSearch from "@/components/brutal-search";
 import brutalUploader from "@/components/brutal-uploader";
+import brutalCreateTrablModal
+  from "@/components/brutal-catalog-trabl/brutal-create-trabl/brutal-create-trabl-modal/brutal-create-trabl-modal.vue";
 import {POSITION, useToast} from "vue-toastification";
 
 export default defineComponent({
   name: "brutalCreateTrabl",
   components: {
-    brutalButton, brutalSearch, brutalUploader
+    brutalButton, brutalSearch, brutalUploader, brutalCreateTrablModal
   },
   setup() {
     const router = useRouter()
@@ -98,6 +102,8 @@ export default defineComponent({
 
     const filesLimit = ref(false)
 
+    const showModal = ref(false)
+
     watch(() => loadFiles.value,
         (value) => {
       if(value.length > 4) setFilesLimit()
@@ -108,7 +114,7 @@ export default defineComponent({
       filesLimit.value = true
       toast.error("5 пруфов более, чем достаточно", {
         position: POSITION.BOTTOM_CENTER,
-        timeout: 2000,
+        timeout: 4000,
       })
     }
 
@@ -155,13 +161,50 @@ export default defineComponent({
     }
 
 
+    function createTrabl() {
+      showModal.value = true
+    }
+
+    function handleClose() {
+      showModal.value = false
+    }
+
+    function onToastModal(toastMessage) {
+      toast.info(`${toastMessage}`, {
+        timeout: 2000,
+        closeButton: false,
+        position: POSITION.BOTTOM_CENTER
+      })
+    }
+
     function clickBack() {
       router.push({name: RoutesNames.CatalogTrabl})
     }
 
     return {
       //iniciator, interes, typeTrabl, compucter, locationn, pisanina
-      typeItemName, typeItemId, needPCNumber, userName, clickBack, users, query, searchResult, onQuery, loadFiles, acceptFiles, filesLimit
+      typeItemName,
+      typeItemId,
+      needPCNumber,
+      userName,
+      clickBack,
+      users,
+
+      //search:
+      query,
+      searchResult,
+      onQuery,
+
+      //uploader:
+      loadFiles,
+      acceptFiles,
+      filesLimit,
+
+      //modal:
+      showModal,
+      createTrabl,
+      handleClose,
+      onToastModal
     }
   }
 })
@@ -251,6 +294,11 @@ textarea::placeholder {
   &__non-file {
     margin-top: 0;
   }
+}
+
+.brutal-create-trabl-modal {
+  position: relative;
+  top: -50%;
 }
 
 
