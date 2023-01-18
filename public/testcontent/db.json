@@ -1,4 +1,29 @@
 {
+  "trabls": [
+    {
+      "trablId": "92c10815-7ad4-4b4b-aaca-21746be545ac",
+      "iniciatrUserId": "54563a95-591b-4937-a9c0-0a16c48da30b",
+      "inciatrName": "Zooooooooy",
+      "userId": "663a150a-a57e-497c-b9af-d9c34e7117eb",
+      "userName": "Самый ИТ-похуист",
+      "trablTypeId": "5f2b351f-45d1-468e-b0f5-884cd4a833f4",
+      "trablTypeName": "Сломался компуктер",
+      "PCnumber": null,
+      "location": "Проспект печали",
+      "discription": "Утопил компуктер, теперь он не включается",
+      "statusTrabl": "New",
+      "blowJobGroupId": "10492405-8c88-431f-a4ff-f0370687f970",
+      "blowJobGroupName": "Техподдержники",
+      "ExecuterUserId": "54563a95-591b-4937-a9c0-0a16c48da30b",
+      "ExecuterName": "Zooooooooy",
+      "trablPrufs": [
+        {
+          "fileUrl": "brutal-itsm-prufs/123.png"
+        }
+      ],
+      "id": 1
+    }
+  ],
   "users": [
     {
       "id": "663a150a-a57e-497c-b9af-d9c34e7117eb",

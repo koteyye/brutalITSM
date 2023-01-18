@@ -37,7 +37,7 @@ export default  defineComponent({
   setup(props) {
 
 
-    const newsImg = computed(() => `/image/${props.newsData.image}`)
+    const newsImg = computed(() => `/images/${props.newsData.image}`)
 
     function handleNewsClick() {
       //Открыть новость

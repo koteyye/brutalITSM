@@ -202,6 +202,8 @@ export default defineComponent({
       router.push({name: RoutesNames.CatalogTrabl})
     }
 
+
+
     return {
       //iniciator, interes, typeTrabl, compucter, locationn, pisanina
       typeItemName,
@@ -226,7 +228,7 @@ export default defineComponent({
       createTrabl,
       handleClose,
       modalResponse,
-      onConfirm
+
     }
   }
 })
