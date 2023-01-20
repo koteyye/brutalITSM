@@ -3,7 +3,7 @@
         <div class="header_text brutal-trabls-table-header__number">№</div>
         <div class="header_text brutal-trabls-table-header__iniciator">Инициатор</div>
         <div class="header_text brutal-trabls-table-header__type">Тип</div>
-        <div class="header_text brutal-trabls-table-header__workgroup">Рабочая группа</div>
+        <div class="header_text brutal-trabls-table-header__title">Тема</div>
         <div class="header_text brutal-trabls-table-header__status">Статус</div>
         <div class="header_text brutal-trabls-table-header__deadline">Срок</div>
     </div>

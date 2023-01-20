@@ -13,7 +13,7 @@
       <div class="title cursor-pointer reiting" @click="handleRating">АнтиРейтинг</div>
       <div class="cursor-pointer nahui">
         <div class="nahui">
-          <brutal-button icon="fa-solid fa-person-walking-dashed-line-arrow-right"/>
+          <brutal-button icon="fa-solid fa-person-walking-dashed-line-arrow-right" @onClick="testF(value=1)"/>
         </div>
       </div>
 
@@ -48,9 +48,12 @@ export default defineComponent( {
     function handleLogoClick() {
       router.push({name: RoutesNames.Main})
     }
+    function testF(value) {
+      console.log(value)
+    }
 
     return {
-      handleFeedback, handleRating, handleTrabls, handleTrablCatalog, handleLogoClick
+      handleFeedback, handleRating, handleTrabls, handleTrablCatalog, handleLogoClick, testF
     }
   }
 })

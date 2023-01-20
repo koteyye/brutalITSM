@@ -1,13 +1,10 @@
 <template>
-    <div
-    v-for="(trabls, index) in data"
-    :key="index"
-    class="brutal-trabls-table">
+    <div class="brutal-trabls-table">
         <div class="brutal-trabls-table-rows">
             <div class="text brutal-trabls-table-rows__number">{{ trabls.number }}</div>
-            <div class="text brutal-trabls-table-rows__iniciator">{{ trabls.iniciatr }}</div>
+            <div class="text brutal-trabls-table-rows__iniciator">{{ trabls.initiatr }}</div>
             <div class="text brutal-trabls-table-rows__type">{{ trabls.type }}</div>
-            <div class="text brutal-trabls-table-rows__workgroup">{{ trabls.workgroup }}</div>
+            <div class="text brutal-trabls-table-rows__workgroup">{{ trabls.title }}</div>
             <div class="text brutal-trabls-table-rows__status">{{ trabls.status }}</div>
             <div class="text brutal-trabls-table-rows__deadline">{{ trabls.deadline }}</div>
         </div>
@@ -19,29 +16,16 @@ import { defineComponent } from 'vue';
 export default defineComponent(
     {
         name: "brutalTrablsTableRow",
-        setup() {
-            const data = [
-                {
-                    "number": "123456",
-                    "iniciatr": "IT-rabbit",
-                    "type": "Сломался компуктер",
-                    "workgroup": "Техподдержники",
-                    "status": "Новый",
-                    "deadline": "2023-01-18 11:00:00"
-                },
-                {
-                    "number": "125356",
-                    "iniciatr": "Zoooooy",
-                    "type": "Сломался компуктер",
-                    "workgroup": "Техподдержники",
-                    "status": "В работе",
-                    "deadline": "2023-01-18 11:00:00"
+        props: {
+            trabls: {
+                type: Object,
+                default() {
+                    return{}
                 }
-            ]
-
-        return {
-            data
-        }
+            }
+        },
+        setup(props) {
+        return {}
         }
     }
 )

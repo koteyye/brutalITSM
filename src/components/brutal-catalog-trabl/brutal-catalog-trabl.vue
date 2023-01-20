@@ -26,7 +26,7 @@ export default defineComponent( {
     async function getCatalogTrabl() {
       const response = await fetch(`${baseUrl}/catalogTrabl`)
       catalog.value = await response.json()
-      console.log(catalog.value)
+      console.log(catalog)
     }
 
     const serviceLogo = computed(() => `/image/${catalog.value.image}`)

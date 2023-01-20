@@ -2,8 +2,7 @@
   <div class="button-btn">
     <button :class="[`btn`, `btn_${color}`, {'btn_rounded':rounded}, {'btn_icon': icon},
     {'btn_large': size === 'large'}]"
-            :disabled="disabled"
-            @click="onClick">
+            :disabled="disabled">
       <span v-if="icon">
         <fa :icon="`${icon}`"/>
       </span>
@@ -46,13 +45,8 @@ export default {
     }
   },
   innertiAttrs: false,
-  setup(props, ctx) {
-    function onClick() {
-      ctx.emit('click')
-    }
-    return {
-      onClick
-    }
+  setup(props) {
+
   }
 }
 </script>
