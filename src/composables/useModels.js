@@ -3,7 +3,7 @@ import { onMounted, ref, watch } from 'vue'
 
 export default function useModels(getIdRef) {
     const getTrabls = ref([])
-    const getStatus = ref([])
+    const getStatus = ({})
     const getTrablsById = ref([])
 
     const setTrabls = async () => {

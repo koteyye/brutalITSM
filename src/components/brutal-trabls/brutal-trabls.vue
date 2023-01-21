@@ -5,18 +5,15 @@
       <div class="brutal-trabls__switchers">
         <brutalButton label="В работе" :disabled="btnWorkIsDisable" class="btn1" @click="handleSwitchWork(value='work')"/>
         <brutalButton label="Архив" :disabled="btnArchIsDisable" class="btn2" @click="handleSwitchWork(value='arch')"/>
-        <div class="brutal-trabls__filterStatus">
-          <span class="brutal-trabls__selectorTitle" v-show="selectStatus = ''">Статус</span>
-          <select v-model="selectStatus"
-          class="brutal-trabls__filterSelector">
-
-            <option
-            v-for="(status, index) in getStatus"
-            :key="index"
-            default-value=""
-            >{{ status }}</option>
-          </select>
-       </div>  
+        <div class="brutal-trabls__filter">
+          <brutalFilter
+          v-for="getStatus in getStatus" 
+          :key="getStatus.index"
+          :options="getStatus"
+          :multiSelect="true"
+          :name="`Выбери статус`"
+          @filterValues="runFilter"/>
+        </div>
       </div>
       <div
       class="brutal-trabls__trabl-table">
@@ -32,24 +29,25 @@
 </template>
 
 <script>
-import { defineComponent, ref, watch } from 'vue';
+import { defineComponent, onMounted, ref, watch } from 'vue';
 import brutalButton from '../button/brutal-button.vue';
 import BrutalTrablsTableHeader from './brutal-trabls-table-header';
 import BrutalTrablsTableRow from './brutal-trabls-table-row/brutal-trabls-table-row.vue';
+import brutalFilter from '../brtual-filter';
 import useModel from '../../composables/useModels'
 import useFilters from '../../composables/useFilters'
 
 export default defineComponent(
   {
     name: "brutalTrabls",
-    components: {brutalButton, BrutalTrablsTableHeader, BrutalTrablsTableRow},
+    components: {brutalButton, BrutalTrablsTableHeader, BrutalTrablsTableRow, brutalFilter},
     setup() {
       const btnWorkIsDisable = ref(false)
       const btnArchIsDisable = ref(true)
       const id = ref('')
 
-      const selectStatus = ref(null)
-
+      const filterStatus = ref('')
+      const getTrablsByStatus = ref([])
 
       function handleSwitchWork(value) {
         if(value === 'work') {
@@ -62,8 +60,13 @@ export default defineComponent(
         }
       }
 
+      function runFilter(status) {
+        { getTrablsByStatus } = useModel(status)
+      }
+
       const { getTrabls, getStatus } = useModel()
-      console.log(getStatus)
+      
+
 
       return {
         btnWorkIsDisable,
@@ -71,7 +74,8 @@ export default defineComponent(
         handleSwitchWork,
         getTrabls,
         getStatus,
-        selectStatus
+        runFilter,
+        getTrablsByStatus
       }
     }
   }
@@ -92,8 +96,13 @@ export default defineComponent(
     display: flex;
     margin-top: 20px;
     margin-bottom: 20px;
-    padding-right: 40%;
+    padding-right: 60%;
     
+  }
+  &__filter {
+    margin-left: 20px;
+    position: fixed;
+    left: 43%
   }
   &__filterStatus {
     padding-bottom: 35px;
@@ -110,6 +119,9 @@ export default defineComponent(
     overflow-x:auto;
     width: min(150px);
     height: 40px;
+    padding: 0 20;
+    margin-top: 25px;
+    border-color: $--color-main;
   }
   &__selectorTitle {
     color: rgba($--color-black, 1);
