@@ -6,12 +6,14 @@
         <brutalButton label="В работе" :disabled="btnWorkIsDisable" class="btn1" @click="handleSwitchWork(value='work')"/>
         <brutalButton label="Архив" :disabled="btnArchIsDisable" class="btn2" @click="handleSwitchWork(value='arch')"/>
         <div class="brutal-trabls__filterStatus">
-          <span class="brutal-trabls__selectorTitle">Статус</span>
+          <span class="brutal-trabls__selectorTitle" v-show="selectStatus = ''">Статус</span>
           <select v-model="selectStatus"
           class="brutal-trabls__filterSelector">
+
             <option
             v-for="(status, index) in getStatus"
             :key="index"
+            default-value=""
             >{{ status }}</option>
           </select>
        </div>  
@@ -30,7 +32,7 @@
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, watch } from 'vue';
 import brutalButton from '../button/brutal-button.vue';
 import BrutalTrablsTableHeader from './brutal-trabls-table-header';
 import BrutalTrablsTableRow from './brutal-trabls-table-row/brutal-trabls-table-row.vue';
@@ -45,7 +47,9 @@ export default defineComponent(
       const btnWorkIsDisable = ref(false)
       const btnArchIsDisable = ref(true)
       const id = ref('')
-      const statuses = ref([])
+
+      const selectStatus = ref(null)
+
 
       function handleSwitchWork(value) {
         if(value === 'work') {
@@ -66,7 +70,8 @@ export default defineComponent(
         btnArchIsDisable,
         handleSwitchWork,
         getTrabls,
-        getStatus
+        getStatus,
+        selectStatus
       }
     }
   }
