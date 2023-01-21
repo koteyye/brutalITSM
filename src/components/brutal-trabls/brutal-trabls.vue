@@ -3,15 +3,18 @@
     <div class="brutal-trabls">
       <div class="brutal-trabls__name header_text">Мои траблы</div>
       <div class="brutal-trabls__switchers">
-        <brutalButton label="В работе" :disabled="btnWorkIsDisable" class="btn1" @click="btnSwitchWork(value='work')"/>
-        <brutalButton label="Архив" :disabled="btnArchIsDisable" class="btn2" @click="btnSwitchWork(value='arch')"/>
-        <select v-model="selectStatus">
-          <option disabled value="">Выбрать статус</option>
-          <option
-          v-for="(trabls, status) in getTrabls"
-          :key="status"
-          >{{ trabls.status }}</option>
-        </select>
+        <brutalButton label="В работе" :disabled="btnWorkIsDisable" class="btn1" @click="handleSwitchWork(value='work')"/>
+        <brutalButton label="Архив" :disabled="btnArchIsDisable" class="btn2" @click="handleSwitchWork(value='arch')"/>
+        <div class="brutal-trabls__filterStatus">
+          <span class="brutal-trabls__selectorTitle">Статус</span>
+          <select v-model="selectStatus"
+          class="brutal-trabls__filterSelector">
+            <option
+            v-for="(status, index) in getStatus"
+            :key="index"
+            >{{ status }}</option>
+          </select>
+       </div>  
       </div>
       <div
       class="brutal-trabls__trabl-table">
@@ -44,7 +47,7 @@ export default defineComponent(
       const id = ref('')
       const statuses = ref([])
 
-      function btnSwitchWork(value) {
+      function handleSwitchWork(value) {
         if(value === 'work') {
           btnWorkIsDisable.value = true
           btnArchIsDisable.value = false
@@ -55,15 +58,15 @@ export default defineComponent(
         }
       }
 
-      const { getTrabls } = useModel()
-      console.log()
-      const { getStatuses } = useFilters(getTrabls)
+      const { getTrabls, getStatus } = useModel()
+      console.log(getStatus)
 
       return {
         btnWorkIsDisable,
         btnArchIsDisable,
-        btnSwitchWork,
-        getTrabls
+        handleSwitchWork,
+        getTrabls,
+        getStatus
       }
     }
   }
@@ -84,7 +87,32 @@ export default defineComponent(
     display: flex;
     margin-top: 20px;
     margin-bottom: 20px;
-    padding-right: 60%;
+    padding-right: 40%;
+    
+  }
+  &__filterStatus {
+    padding-bottom: 35px;
+    margin-left: 25px
+  }
+  &__filterSelector {
+    font-family: KistyCC;
+    font-size: 24px;
+    text-align: center;
+    background-color: $--color-main;
+    margin-left: 5%;
+    border-radius: $radius*3;
+    user-select: none;
+    overflow-x:auto;
+    width: min(150px);
+    height: 40px;
+  }
+  &__selectorTitle {
+    color: rgba($--color-black, 1);
+    position: relative;
+    top: 50%;
+    left: 20%;
+    font-family: KistyCC;
+    font-size: 24px
   }
 }
 
