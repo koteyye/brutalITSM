@@ -25,7 +25,7 @@ export default function useModels(idRef) {
         setTrabls(), setTrablsArch()
     })
 
-    watch(()=> idRef, setTrablsById)
+    watch(idRef, setTrablsById)
 
     
 

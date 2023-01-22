@@ -1,6 +1,6 @@
 <template>
     <div class="brutal-trabls-table">
-        <div class="brutal-trabls-table-rows">
+        <div class="brutal-trabls-table-rows" @click="handleRow(trabls.id)">
             <div class="text brutal-trabls-table-rows__number">{{ trabls.number }}</div>
             <div class="text brutal-trabls-table-rows__iniciator">{{ trabls.initiatr }}</div>
             <div class="text brutal-trabls-table-rows__type">{{ trabls.type }}</div>
@@ -24,8 +24,16 @@ export default defineComponent(
                 }
             }
         },
-        setup(props) {
-        return {}
+        emits: ['clickItem'],
+        setup(props, {emit}) {
+
+            function handleRow(id) {
+                emit('clickItem', id)
+            }
+
+        return {
+            handleRow
+        }
         }
     }
 )

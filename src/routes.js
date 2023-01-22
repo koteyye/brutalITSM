@@ -13,6 +13,11 @@ const routes = [
         component: () => import('./components/brutal-trabls/brutal-trabls.vue')
     },
     {
+        path: '/TrablsItem/:id',
+        name: RoutesNames.TrablsItem,
+        component: () => import('./components/brutal-trabls/brutal-trabls-item/brutal-trabls-item.vue')
+    },
+    {
         path: '/CatalogTrabl',
         name: RoutesNames.CatalogTrabl,
         component: () => import('./components/brutal-catalog-trabl/brutal-catalog-trabl.vue')

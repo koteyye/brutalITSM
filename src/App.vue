@@ -9,11 +9,17 @@
 
 <script>
 import brutalHeader from '@/components/header'
+import { defineComponent } from 'vue';
 
-export default {
+export default defineComponent(
+  {
   name: 'app',
-  components: {brutalHeader}
+  components: {brutalHeader},
+  setup() {
+    document.title = 'BrutalITSM'
+  }
 }
+) 
 
 </script>
 

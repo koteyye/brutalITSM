@@ -302,6 +302,7 @@ export default defineComponent({
 
 .fieldname {
   flex-basis: 50%;
+  font-size: 24px;
 }
 
 .brutal-create__pisanina-field {

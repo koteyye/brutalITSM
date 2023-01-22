@@ -7,6 +7,7 @@ export const fetchTrabl = async () => {
 
 export const fetchTrablById = async (id) => {
     const response = await fetch(`${baseURL}/trabls?id=${id}`)
+    return await response.json()
 }
 
 export const fetchTrablsArch = async () => {

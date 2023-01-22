@@ -14,12 +14,14 @@
         v-for="trabls in getTrabls"
         :key="trabls.id"
         :trabls="trabls"
+        @clickItem="handleTrablItem"
         />
         <brutal-trabls-table-row
         v-show="btnArchIsDisable"
         v-for="trabls in getTrablsArch"
         :key="trabls.id"
         :trabls="trabls"
+        @clickItem="handleTrablItem"
         />
       </div>
     </div>
@@ -31,17 +33,22 @@ import { defineComponent, onMounted, ref, watch } from 'vue';
 import brutalButton from '../button/brutal-button.vue';
 import BrutalTrablsTableHeader from './brutal-trabls-table-header';
 import BrutalTrablsTableRow from './brutal-trabls-table-row/brutal-trabls-table-row.vue';
-import brutalFilter from '../brtual-filter';
 import useModel from '../../composables/useModels'
+import { RoutesNames } from '@/shared';
+import { useRouter } from 'vue-router';
 
 export default defineComponent(
   {
     name: "brutalTrabls",
     components: {brutalButton, BrutalTrablsTableHeader, BrutalTrablsTableRow},
     setup() {
+      
       const btnWorkIsDisable = ref(true)
       const btnArchIsDisable = ref(false)
       const id = ref('')
+      const router = useRouter()
+
+      const { getTrabls, getTrablsArch } = useModel()
 
       function handleSwitchWork(value) {
         if(value === 'work') {
@@ -54,14 +61,19 @@ export default defineComponent(
         }
       }
 
-      const { getTrabls, getTrablsArch } = useModel()
+      function handleTrablItem(id) {
+        router.push({name: RoutesNames.TrablsItem, params: {id: id}})
+      }
+
+
 
       return {
         btnWorkIsDisable,
         btnArchIsDisable,
         handleSwitchWork,
         getTrabls,
-        getTrablsArch
+        getTrablsArch,
+        handleTrablItem
       }
     }
   }
