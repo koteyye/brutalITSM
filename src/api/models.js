@@ -8,3 +8,7 @@ export const fetchTrabl = async () => {
 export const fetchTrablById = async (id) => {
     const response = await fetch(`${baseURL}/trabls?id=${id}`)
 }
+
+export const fetchTrablByStatus = async (status) => {
+    const response = await fetch(`${baseURL}/trabls?status=${status}`)
+}

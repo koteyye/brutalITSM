@@ -66,7 +66,7 @@ ul {
   padding-right: 10px;
   padding-bottom: 10px;
   line-height: 50px;
-  font-family: KistyCC;
+  font-family: MorningBreeze-Light;
   font-size: 20px;
   letter-spacing: 3px;
   text-align: left;

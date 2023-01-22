@@ -47,7 +47,7 @@ export default defineComponent(
       const id = ref('')
 
       const filterStatus = ref('')
-      const getTrablsByStatus = ref([])
+      //onst getTrablsByStatus = ref([])
 
       function handleSwitchWork(value) {
         if(value === 'work') {
@@ -61,7 +61,9 @@ export default defineComponent(
       }
 
       function runFilter(status) {
-        { getTrablsByStatus } = useModel(status)
+        console.log(status)
+        const { getTrablsByStatus } = useModel(status)
+        console.log(getTrablsByStatus)
       }
 
       const { getTrabls, getStatus } = useModel()
@@ -74,8 +76,7 @@ export default defineComponent(
         handleSwitchWork,
         getTrabls,
         getStatus,
-        runFilter,
-        getTrablsByStatus
+        runFilter
       }
     }
   }
@@ -87,7 +88,7 @@ export default defineComponent(
 
 .brutal-trabls {
   min-width: 1000px;
-  width: 100%;
+  width: 90%;
   position: absolute;
   margin-left: 20px;
   display: grid;
@@ -109,7 +110,7 @@ export default defineComponent(
     margin-left: 25px
   }
   &__filterSelector {
-    font-family: KistyCC;
+    font-family: MorningBreeze-Light;
     font-size: 24px;
     text-align: center;
     background-color: $--color-main;
@@ -128,7 +129,7 @@ export default defineComponent(
     position: relative;
     top: 50%;
     left: 20%;
-    font-family: KistyCC;
+    font-family: MorningBreeze-Light;
     font-size: 24px
   }
 }

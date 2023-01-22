@@ -99,7 +99,7 @@ export default defineComponent( {
 
 .title {
   color: $--color-text;
-  font-family: KistyCC;
+  font-family: MorningBreeze-Light;
   font-size: 23px;
   letter-spacing: 3px;
   padding: 10px;

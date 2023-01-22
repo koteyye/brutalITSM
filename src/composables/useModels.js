@@ -1,10 +1,11 @@
-import { fetchTrabl, fetchTrablById } from '@/api/models'
+import { fetchTrabl, fetchTrablById, fetchTrablByStatus } from '@/api/models'
 import { onMounted, ref, watch } from 'vue'
 
 export default function useModels(getIdRef) {
     const getTrabls = ref([])
     const getStatus = ({})
     const getTrablsById = ref([])
+    
 
     const setTrabls = async () => {
         getTrabls.value = await fetchTrabl()
@@ -17,11 +18,15 @@ export default function useModels(getIdRef) {
         getTrablsById.value = await fetchTrablById(getIdRef.value)
     }
 
+
+
     onMounted(() => {
         setTrabls()
     })
 
     watch(getIdRef, setTrablsById)
+
+    
 
     return {
         getTrabls,

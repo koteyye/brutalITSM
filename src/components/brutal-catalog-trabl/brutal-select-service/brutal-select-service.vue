@@ -59,11 +59,11 @@ export default defineComponent({
   margin-left: 100px;
   &:hover {
     color: $--color-text;
-    font-family: KistyCC;
+    font-family: MorningBreeze-Light;
     opacity: 100;
   }
   &__text {
-    font-family: KistyCC;
+    font-family: MorningBreeze-Light;
     font-size: 30px;
     text-align: center;
     color: $--color-apsidgray;
@@ -71,7 +71,7 @@ export default defineComponent({
   &__nonService {
     margin-top: 30px;
     text-align: center;
-    font-family: KistyCC;
+    font-family: MorningBreeze-Light;
     color: $--color-apsidgray;
     &:hover {
       color: $--color-huy

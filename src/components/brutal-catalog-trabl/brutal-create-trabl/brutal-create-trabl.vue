@@ -283,7 +283,7 @@ export default defineComponent({
   border-radius: $radius*3;
   padding-left: 20px;
   flex-basis: 50%;
-  font-family: KistyCC;
+  font-family: MorningBreeze-Light;
   font-size: 24px;
   padding-top: 5px;
   padding-bottom: 5px;

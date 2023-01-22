@@ -163,7 +163,7 @@ export default defineComponent({
     border-radius: $radius*3;
     margin-top: 10px;
     color: $--color-main;
-    font-family: "Mrs Onion Monsters";
+    font-family: "MorningBreeze-Bold";
     font-size: 14px;
     letter-spacing: 3px;
     padding: 20px;
@@ -210,7 +210,7 @@ export default defineComponent({
     border: none;
     transition: .2s;
     font-weight: 500;
-    font-family: "Mrs Onion Monsters";
+    font-family: "MorningBreeze-Bold";
     font-size: 16px;
     line-height: 21px;
     position: relative;

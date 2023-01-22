@@ -86,7 +86,7 @@ export default defineComponent({
     width: 100%;
     height: 40px;
     border-radius: $radius*3;
-    font-family: Mrs Onion Monsters;
+    font-family: MorningBreeze-Bold;
     font-size: 24px;
     &__field {
         display: flex;
@@ -102,7 +102,7 @@ export default defineComponent({
         width: 100%;
         border-bottom-left-radius: $radius*3;
         border-bottom-right-radius: $radius*3;
-        font-family: KistyCC;
+        font-family: MorningBreeze-Light;
         font-size: 20px;
     }
     &__chevron-down-items {

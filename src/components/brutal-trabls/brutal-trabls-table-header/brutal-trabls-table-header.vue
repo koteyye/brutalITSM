@@ -1,6 +1,6 @@
 <template >
     <div class="brutal-trabls-table-header">
-        <div class="header_text brutal-trabls-table-header__number">№</div>
+        <div class="header_text brutal-trabls-table-header__number">Номер</div>
         <div class="header_text brutal-trabls-table-header__iniciator">Инициатор</div>
         <div class="header_text brutal-trabls-table-header__type">Тип</div>
         <div class="header_text brutal-trabls-table-header__title">Тема</div>
@@ -28,16 +28,16 @@ export default defineComponent(
     display: flex;
     border-bottom: solid 1px rgba($--color-verygray, 0.2);
     &__number {
-        flex-basis: 15%;
+        flex-basis: 10%;
     }
     &__iniciator {
-        flex-basis: 15%;
+        flex-basis: 10%;
     }
     &__type {
         flex-basis: 20%;
     }
-    &__workgroup {
-        flex-basis: 20%;
+    &__title {
+        flex-basis: 20%
     }
     &__status {
         flex-basis: 10%;

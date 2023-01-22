@@ -4,7 +4,7 @@
             <div class="text brutal-trabls-table-rows__number">{{ trabls.number }}</div>
             <div class="text brutal-trabls-table-rows__iniciator">{{ trabls.initiatr }}</div>
             <div class="text brutal-trabls-table-rows__type">{{ trabls.type }}</div>
-            <div class="text brutal-trabls-table-rows__workgroup">{{ trabls.title }}</div>
+            <div class="text brutal-trabls-table-rows__title">{{ trabls.title }}</div>
             <div class="text brutal-trabls-table-rows__status">{{ trabls.status }}</div>
             <div class="text brutal-trabls-table-rows__deadline">{{ trabls.deadline }}</div>
         </div>
@@ -44,16 +44,16 @@ export default defineComponent(
         background: rgba($--color-verygray, 0.2)
     }
     &__number {
-        flex-basis: 15%;
+        flex-basis: 10%;
     }
     &__iniciator {
-        flex-basis: 15%;
+        flex-basis: 10%;
     }
     &__type {
         flex-basis: 20%;
     }
-    &__workgroup {
-        flex-basis: 20%;
+    &__title {
+        flex-basis: 20%
     }
     &__status {
         flex-basis: 10%;

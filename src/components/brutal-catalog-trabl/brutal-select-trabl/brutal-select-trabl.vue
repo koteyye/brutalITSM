@@ -68,7 +68,7 @@ export default defineComponent({
     }
 
     function serviceLogo(image) {
-      logo.value = `/image/${image.value}`
+      logo.value = `/images/${image.value}`
       return logo
     }
 

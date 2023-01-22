@@ -64,7 +64,7 @@ export default {
   cursor: pointer;
   transition: .2s;
   font-weight: 500;
-  font-family: "Mrs Onion Monsters";
+  font-family: "MorningBreeze-Bold";
   font-size: 21px;
   line-height: 21px;
 
@@ -93,7 +93,7 @@ export default {
   }
 
   &_large {
-    height: 170px;
+    height: 100px;
     padding: 0 30px;
   }
 
