@@ -5,21 +5,19 @@
       <div class="brutal-trabls__switchers">
         <brutalButton label="В работе" :disabled="btnWorkIsDisable" class="btn1" @click="handleSwitchWork(value='work')"/>
         <brutalButton label="Архив" :disabled="btnArchIsDisable" class="btn2" @click="handleSwitchWork(value='arch')"/>
-        <div class="brutal-trabls__filter">
-          <brutalFilter
-          v-for="getStatus in getStatus" 
-          :key="getStatus.index"
-          :options="getStatus"
-          :multiSelect="true"
-          :name="`Выбери статус`"
-          @filterValues="runFilter"/>
-        </div>
       </div>
       <div
       class="brutal-trabls__trabl-table">
         <brutal-trabls-table-header/>
         <brutal-trabls-table-row
+        v-show="btnWorkIsDisable"
         v-for="trabls in getTrabls"
+        :key="trabls.id"
+        :trabls="trabls"
+        />
+        <brutal-trabls-table-row
+        v-show="btnArchIsDisable"
+        v-for="trabls in getTrablsArch"
         :key="trabls.id"
         :trabls="trabls"
         />
@@ -35,19 +33,15 @@ import BrutalTrablsTableHeader from './brutal-trabls-table-header';
 import BrutalTrablsTableRow from './brutal-trabls-table-row/brutal-trabls-table-row.vue';
 import brutalFilter from '../brtual-filter';
 import useModel from '../../composables/useModels'
-import useFilters from '../../composables/useFilters'
 
 export default defineComponent(
   {
     name: "brutalTrabls",
-    components: {brutalButton, BrutalTrablsTableHeader, BrutalTrablsTableRow, brutalFilter},
+    components: {brutalButton, BrutalTrablsTableHeader, BrutalTrablsTableRow},
     setup() {
-      const btnWorkIsDisable = ref(false)
-      const btnArchIsDisable = ref(true)
+      const btnWorkIsDisable = ref(true)
+      const btnArchIsDisable = ref(false)
       const id = ref('')
-
-      const filterStatus = ref('')
-      //onst getTrablsByStatus = ref([])
 
       function handleSwitchWork(value) {
         if(value === 'work') {
@@ -60,23 +54,14 @@ export default defineComponent(
         }
       }
 
-      function runFilter(status) {
-        console.log(status)
-        const { getTrablsByStatus } = useModel(status)
-        console.log(getTrablsByStatus)
-      }
-
-      const { getTrabls, getStatus } = useModel()
-      
-
+      const { getTrabls, getTrablsArch } = useModel()
 
       return {
         btnWorkIsDisable,
         btnArchIsDisable,
         handleSwitchWork,
         getTrabls,
-        getStatus,
-        runFilter
+        getTrablsArch
       }
     }
   }
@@ -99,38 +84,6 @@ export default defineComponent(
     margin-bottom: 20px;
     padding-right: 80%;
     
-  }
-  &__filter {
-    margin-left: 20px;
-    position: fixed;
-    left: 20%
-  }
-  &__filterStatus {
-    padding-bottom: 35px;
-    margin-left: 25px
-  }
-  &__filterSelector {
-    font-family: MorningBreeze-Light;
-    font-size: 24px;
-    text-align: center;
-    background-color: $--color-main;
-    margin-left: 5%;
-    border-radius: $radius*3;
-    user-select: none;
-    overflow-x:auto;
-    width: min(150px);
-    height: 40px;
-    padding: 0 20;
-    margin-top: 25px;
-    border-color: $--color-main;
-  }
-  &__selectorTitle {
-    color: rgba($--color-black, 1);
-    position: relative;
-    top: 50%;
-    left: 20%;
-    font-family: MorningBreeze-Light;
-    font-size: 24px
   }
 }
 

@@ -1,39 +1,41 @@
-import { fetchTrabl, fetchTrablById, fetchTrablByStatus } from '@/api/models'
+import { fetchTrabl, fetchTrablById, fetchTrablsArch } from '@/api/models'
 import { onMounted, ref, watch } from 'vue'
 
-export default function useModels(getIdRef) {
+export default function useModels(idRef) {
     const getTrabls = ref([])
-    const getStatus = ({})
+    const getTrablsArch = ref([])
     const getTrablsById = ref([])
-    
+
 
     const setTrabls = async () => {
         getTrabls.value = await fetchTrabl()
-        let statuses = getTrabls.value.map(getTrabls => getTrabls.status + '')
-        let uniqueStatus = new Set(statuses)
-        getStatus.value = ([...uniqueStatus])
+    }
+
+    const setTrablsArch = async () => {
+        getTrablsArch.value = await fetchTrablsArch()
     }
 
     const setTrablsById = async () => {
-        getTrablsById.value = await fetchTrablById(getIdRef.value)
+        getTrablsById.value = await fetchTrablById(idRef.value)
     }
 
 
 
     onMounted(() => {
-        setTrabls()
+        setTrabls(), setTrablsArch()
     })
 
-    watch(getIdRef, setTrablsById)
+    watch(()=> idRef, setTrablsById)
 
     
 
     return {
         getTrabls,
         getTrablsById,
+        getTrablsArch,
         setTrabls,
         setTrablsById,
-        getStatus
+        setTrablsArch
     }
 }
 
