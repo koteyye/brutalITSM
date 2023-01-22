@@ -97,13 +97,13 @@ export default defineComponent(
     display: flex;
     margin-top: 20px;
     margin-bottom: 20px;
-    padding-right: 60%;
+    padding-right: 80%;
     
   }
   &__filter {
     margin-left: 20px;
     position: fixed;
-    left: 43%
+    left: 20%
   }
   &__filterStatus {
     padding-bottom: 35px;
