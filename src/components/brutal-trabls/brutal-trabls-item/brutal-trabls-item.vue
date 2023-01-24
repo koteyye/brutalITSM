@@ -55,6 +55,13 @@
                     <span class="field-value">{{trabl.description}}</span>
                 </div>
             </div>
+            <div class="brutal-trabls-item__prufs">
+              <brutal-trabls-item-prufs
+                v-show="btnPrufs"
+                v-for="trabl in getTrablsById"
+                :key="trabl.id"
+                :trabl-info="trabl"/>
+            </div>
         </div>
     </div>
 </template>
@@ -63,20 +70,22 @@ import { defineComponent, onMounted, ref } from 'vue';
 import brutalButton from '@/components/button';
 import useModels from '@/composables/useModels';
 import { useRoute } from 'vue-router';
+import brutalTrablsItemPrufs from "@/components/brutal-trabls/brutal-trabls-item/brutal-trabls-item-prufs";
 
 export default defineComponent(
     {
     name: "brutalTrablsItem",
-    components: {brutalButton},
+    components: {brutalButton, brutalTrablsItemPrufs},
     setup() {
         const route = useRoute()
         const id = ref('')
         const btnMainInfo = ref(true)
         const btnPrufs = ref(false)
         const btnHistory = ref(false)
+
+
         
         function handleSwitchSection(switcher) {
-            console.log(switcher)
             if(switcher === 1) {
                 btnMainInfo.value = true
                 btnPrufs.value = false
@@ -92,13 +101,12 @@ export default defineComponent(
                 btnPrufs.value = false
                 btnHistory.value = true
             }
-            console.log(`btnMainInfo = ${btnMainInfo.value}`, `btnPrufs = ${btnPrufs.value}`, `btnHistory = ${btnHistory.value}`)
         }
 
         onMounted(() => id.value = route.params.id)
 
         const {getTrablsById} = useModels(id)
-        console.log(getTrablsById)
+
         return {
             getTrablsById,
             handleSwitchSection,
