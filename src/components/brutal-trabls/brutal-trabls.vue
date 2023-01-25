@@ -50,6 +50,11 @@ export default defineComponent(
 
       const { getTrabls, getTrablsArch } = useModel()
 
+      watch(
+    () => getTrabls.value,
+    (value) => console.log(value[0].deadline)
+  )
+
       function handleSwitchWork(value) {
         if(value === 'work') {
           btnWorkIsDisable.value = true

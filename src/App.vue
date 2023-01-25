@@ -1,10 +1,11 @@
 <template>
-  <div id="app" class="background">
-    <brutalHeader />
-    <div class="app-main-page">
-      <router-view/>
-    </div>
-  </div>
+      <div id="app" class="background">
+        <brutalHeader />
+        <div class="app-main-page">
+          <router-view/>
+        </div>
+        <div class="background"/>
+      </div>
 </template>
 
 <script>
@@ -32,6 +33,12 @@ export default defineComponent(
   flex-direction: column;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 </style>
