@@ -55,12 +55,12 @@
                     <span class="field-value">{{trabl.description}}</span>
                 </div>
             </div>
-            <div class="brutal-trabls-item__prufs">
+            <div class="brutal-trabls-item__prufs"
+                v-for="trabl in getTrablsById"
+                :key="trabl.index">
               <brutal-trabls-item-prufs
                 v-show="btnPrufs"
-                v-for="trabl in getTrablsById"
-                :key="trabl.id"
-                :trabl-info="trabl"/>
+                :trabl-info="trabl.prufs"/>
             </div>
         </div>
     </div>
@@ -104,7 +104,7 @@ export default defineComponent(
         }
 
         onMounted(() => id.value = route.params.id)
-
+        
         const {getTrablsById} = useModels(id)
 
         return {

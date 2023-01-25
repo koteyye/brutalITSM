@@ -1,14 +1,18 @@
 <template>
   <div class="brutal-trabls-item-prufs">
-    <div class="brutal-trabls-item-prufs__prufsFile">
+    <div class="brutal-trabls-item-prufs__prufsFile"
+    v-for="(prufsObj, index) in prufs"
+    :key="index"
+    >
       <img
-        v-show="trablInfo.prufs.mimeType === 'image/jpeg'"
-        :src="pruf"
+        v-show="checkMimeType(prufsObj.mimeType)"
+        :src="prufsObj.src"
         alt="img"
         class="cursor-pointer"
         height="300"
         width="300"
         @click="handlePrufsClick"/>
+        
     </div>
   </div>
 </template>
@@ -22,19 +26,30 @@ export default defineComponent(
       name: "brutalTrablsItemPrufs",
       props: {
         trablInfo: {
-          type: Object,
+          type: Array,
           default() {
-            return {}
+            []
           }
         }
       },
       setup(props) {
         const objectPrufs = ref(props.trablInfo.prufs)
+        
 
-        const pruf = ref([])
+        
+        //const prufs = computed(() => props.trablInfo.map((item) => `${filepath}${item.s3}`))
+
+        const prufs = computed(() => props.trablInfo.map((item) => ({mimeType: item.mimeType, src: `${filepath}${item.s3}`})))
 
 
+        console.log(prufs.value)
 
+        
+        function checkMimeType(type) {
+          const aaa = type.includes('image')
+          console.log({type, bol: aaa})
+          return aaa
+        }
 
         onMounted(() => getPrufs())
 
@@ -43,7 +58,8 @@ export default defineComponent(
         }
 
         return {
-
+          checkMimeType,
+          prufs
         }
       }
     }

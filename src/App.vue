@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="background">
     <brutalHeader />
     <div class="app-main-page">
       <router-view/>
@@ -24,6 +24,7 @@ export default defineComponent(
 </script>
 
 <style lang="scss">
+
 #app {
   position: relative;
   height: 100vh;
@@ -31,9 +32,6 @@ export default defineComponent(
   flex-direction: column;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: url("@/../public/images/5137894.jpg") 50%/ cover
-  border-box
-  padding-box;
 }
 
 </style>

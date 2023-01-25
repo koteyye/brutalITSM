@@ -1,4 +1,4 @@
-const baseURL = 'http://localhost:3000'
+const baseURL = 'http://localhost:3001'
 
 export const fetchTrabl = async () => {
     const response = await fetch(`${baseURL}/trabls?status=В работе`)

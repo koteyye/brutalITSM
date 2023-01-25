@@ -66,3 +66,12 @@ link:hover {
 .flex {
   display: flex;
 }
+
+.background {
+  background: url("@/../public/images/5137894.jpg") 50%/ cover
+  border-box
+  padding-box;
+  top: 0;
+  left: 0;
+  background-repeat: no-repeat;
+}
