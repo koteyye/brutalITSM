@@ -60,10 +60,28 @@
                 :key="trabl.index">
               <brutal-trabls-item-prufs
                 v-show="btnPrufs"
-                :trabl-info="trabl.prufs"/>
+                :trabl-info="trabl.prufs"
+                @prufsClick="showFullImage"
+              />
             </div>
         </div>
     </div>
+
+
+  <div
+      v-show="fullImage"
+      class="brutal-trabls-item__full-prufs">
+    <img
+      :src="fullImage"
+      class="full-image"
+      />
+    <button class="full-image__close"
+            @click="handleCloseFullImage"
+    >
+      <fa  icon="fa-solid fa-xmark"/>
+    </button>
+  </div>
+
 </template>
 <script>
 import { defineComponent, onMounted, ref } from 'vue';
@@ -82,8 +100,7 @@ export default defineComponent(
         const btnMainInfo = ref(true)
         const btnPrufs = ref(false)
         const btnHistory = ref(false)
-
-
+        const fullImage = ref('')
         
         function handleSwitchSection(switcher) {
             if(switcher === 1) {
@@ -103,16 +120,30 @@ export default defineComponent(
             }
         }
 
+
         onMounted(() => id.value = route.params.id)
         
         const {getTrablsById} = useModels(id)
+
+
+        function showFullImage(src) {
+          fullImage.value = src
+        }
+
+        function handleCloseFullImage() {
+          fullImage.value = ''
+          console.log(fullImage.value)
+        }
 
         return {
             getTrablsById,
             handleSwitchSection,
             btnMainInfo,
             btnPrufs,
-            btnHistory
+            btnHistory,
+            showFullImage,
+            fullImage,
+            handleCloseFullImage
         }
     }
     }
@@ -148,9 +179,34 @@ export default defineComponent(
         margin-bottom: 10px;
         padding: 10px;
     }
+  &__full-prufs {
+    position: absolute;
+    z-index: 10;
+    text-align: center;
+    left: 25%
+  }
 }
 
+.full-image {
+  width: 90%;
+  height: 90%;
+  margin: 10px;
+  border: solid 2px $--color-main;
+}
 
+.full-image__close {
+  position: absolute;
+  left: 93.9%;
+  top: 0;
+  border-radius: 100%;
+  background-color: $--color-main;
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+  &:enabled:hover {
+    background-color: $--color-maindef;
+  }
+}
 
 .field-name {
     flex-basis: 50%;

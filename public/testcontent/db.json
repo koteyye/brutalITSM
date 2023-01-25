@@ -31,6 +31,10 @@
         {
           "s3": "prufs/Скриншот 24-01-2023 220223.jpg",
           "mimeType": "image/jpeg"
+        },
+        {
+          "s3": "prufs/Видео 22-01-2023 213651.mp4",
+          "mimeType": "video/mp4"
         }
       ]
     },
