@@ -1,6 +1,19 @@
 <template>
     <div class="brutal-trabls-item">
-        <div class="brutal-trabls-item__area-trabl">
+      <div class="brutal-trabls-item__full-image-modal">
+
+          <brutal-full-image-modal
+              v-if="showFullImage"
+              @close="handleCloseFullImage"
+              :image-files = images.images
+              :source-index = images.sourceIndex
+              :carousel = true
+          />
+
+      </div>
+        <div
+            v-if="showFullImage !== true"
+            class="brutal-trabls-item__area-trabl">
             <div class="brutal-trabls-item__area-name header_text">
                 Трабл
             </div>
@@ -66,15 +79,7 @@
             </div>
         </div>
     </div>
-    <div class="brutal-trabls-item__full-image-modal">
-      <brutal-full-image-modal
-          v-if="showFullImage"
-          @close="handleCloseFullImage"
-          :image-files = images.images
-          :source-index = images.sourceIndex
-          :carousel = true
-      />
-    </div>
+
 
 
 <!--  <div-->
@@ -92,6 +97,10 @@
 <!--  </div>-->
 
 </template>
+
+
+
+
 <script>
 import { defineComponent, onMounted, ref } from 'vue';
 import brutalButton from '@/components/button';
@@ -169,10 +178,10 @@ export default defineComponent(
     &__area-trabl {
         min-width: 800px;
         max-width: 1400px;
-        position: absolute;
-        left: 30%;
         margin-top: 100px;
         border: solid 1px $--color-apsidgray;
+        margin-left: auto;
+        margin-right: auto;
     };
     &__area-name {
         font-size: 36px;

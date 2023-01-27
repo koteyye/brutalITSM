@@ -8,10 +8,14 @@
           </div>
         </div>
         <div class="brutal-full-image-modal__button">
-          <div class="brutal-full-image-modal__left" @click="handleBack">
+          <div
+              v-show="imageIndex !== 0"
+              class="brutal-full-image-modal__left" @click="handleBack">
             <img src="../../assets/image/chevron-compact-left.svg" class="brutal-full-image-modal__icon"/>
           </div>
-          <div class="brutal-full-image-modal__right" @click="handleNext">
+          <div
+              v-show="imageIndex !== (imageFiles.length - 1)"
+              class="brutal-full-image-modal__right" @click="handleNext">
             <img src="../../assets/image/chevron-compact-right.svg" class="brutal-full-image-modal__icon"/>
           </div>
         </div>
@@ -48,7 +52,6 @@ export default defineComponent(
         const imageIndex = ref(props.sourceIndex)
 
         function handleNext() {
-          let x=1
           imageIndex.value += 1
         }
 
@@ -67,7 +70,7 @@ export default defineComponent(
 </script>
 
 <style lang="scss" scoped>
-
+@import '../../assets/styles/main';
 .brutal-full-image-modal {
   &__wrapper {
     max-width: 1080px;
@@ -82,11 +85,13 @@ export default defineComponent(
   &__image {
     max-width: 1060px;
     max-height: 700px;
+    box-shadow: 0 0 20px 20px rgb(56 53 53 / 50%);
+    border-radius: $radius*3;
   }
   &__left {
-    position: fixed;
-    top: 350px;
-    left: -15px;
+    position: absolute;
+    top: 30%;
+    left: -76px;
     opacity: 0.05;
     transition: .5s;
     &:hover {
@@ -94,9 +99,9 @@ export default defineComponent(
     }
   }
   &__right {
-    position: fixed;
-    top: 350px;
-    left: 979px;
+    position: absolute;
+    top: 30%;
+    left: 907px;
     opacity: 0.05;
     transition: .5s;
     &:hover {
