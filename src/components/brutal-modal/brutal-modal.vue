@@ -6,7 +6,7 @@
       @clock="handleClose"/>
   </div>
   <div class="brutal-dialog-content" :style="{ width }">
-    <div class="brutal-dialog-content__body">
+    <div class="brutal-dialog-content__body" :style="{ height }">
       <div class="brutal-dialog-close">
         <fa  icon="fa-regular fa-circle-xmark" @click="handleClose" class="brutal-dialog-close__btn"/>
       </div>
@@ -43,6 +43,10 @@ export default defineComponent(
         persistent: {
           type: Boolean,
           default: false
+        },
+        height: {
+          type: String,
+          default: ''
         }
       },
       emits: ['close', 'update:modelValue'],

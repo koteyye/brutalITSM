@@ -61,26 +61,35 @@
               <brutal-trabls-item-prufs
                 v-show="btnPrufs"
                 :trabl-info="trabl.prufs"
-                @prufsClick="showFullImage"
+                @prufsClick="showFull"
               />
             </div>
         </div>
     </div>
-
-
-  <div
-      v-show="fullImage"
-      class="brutal-trabls-item__full-prufs">
-    <img
-      :src="fullImage"
-      class="full-image"
+    <div class="brutal-trabls-item__full-image-modal">
+      <brutal-full-image-modal
+          v-if="showFullImage"
+          @close="handleCloseFullImage"
+          :image-files = images.images
+          :source-index = images.sourceIndex
+          :carousel = true
       />
-    <button class="full-image__close"
-            @click="handleCloseFullImage"
-    >
-      <fa  icon="fa-solid fa-xmark"/>
-    </button>
-  </div>
+    </div>
+
+
+<!--  <div-->
+<!--      v-show="fullImage"-->
+<!--      class="brutal-trabls-item__full-prufs">-->
+<!--    <img-->
+<!--      :src="fullImage"-->
+<!--      class="full-image"-->
+<!--      />-->
+<!--    <button class="full-image__close"-->
+<!--            @click="handleCloseFullImage"-->
+<!--    >-->
+<!--      <fa  icon="fa-solid fa-xmark"/>-->
+<!--    </button>-->
+<!--  </div>-->
 
 </template>
 <script>
@@ -89,18 +98,20 @@ import brutalButton from '@/components/button';
 import useModels from '@/composables/useModels';
 import { useRoute } from 'vue-router';
 import brutalTrablsItemPrufs from "@/components/brutal-trabls/brutal-trabls-item/brutal-trabls-item-prufs";
+import brutalFullImageModal from "@/components/brutal-full-image-modal";
 
 export default defineComponent(
     {
     name: "brutalTrablsItem",
-    components: {brutalButton, brutalTrablsItemPrufs},
+    components: {brutalButton, brutalTrablsItemPrufs, brutalFullImageModal},
     setup() {
         const route = useRoute()
         const id = ref('')
         const btnMainInfo = ref(true)
         const btnPrufs = ref(false)
         const btnHistory = ref(false)
-        const fullImage = ref('')
+        const images = ref('')
+        const showFullImage = ref(false)
         
         function handleSwitchSection(switcher) {
             if(switcher === 1) {
@@ -126,13 +137,13 @@ export default defineComponent(
         const {getTrablsById} = useModels(id)
 
 
-        function showFullImage(src) {
-          fullImage.value = src
+        function showFull(imageData) {
+          images.value = imageData
+          showFullImage.value = true
         }
 
         function handleCloseFullImage() {
-          fullImage.value = ''
-          console.log(fullImage.value)
+          showFullImage.value = false
         }
 
         return {
@@ -141,9 +152,10 @@ export default defineComponent(
             btnMainInfo,
             btnPrufs,
             btnHistory,
-            showFullImage,
-            fullImage,
-            handleCloseFullImage
+            showFull,
+            images,
+            handleCloseFullImage,
+            showFullImage
         }
     }
     }

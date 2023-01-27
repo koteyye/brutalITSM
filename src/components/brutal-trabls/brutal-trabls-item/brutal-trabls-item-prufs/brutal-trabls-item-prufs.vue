@@ -17,7 +17,7 @@
             class="cursor-pointer"
             height="80"
             width="80"
-            @click="handlePrufsClick(prufsObj.src)"/>
+            @click="handlePrufsClick(index)"/>
         </div>
       </div>
     </div>
@@ -27,9 +27,11 @@
          v-for="(prufsObj, index) in prufs"
          :key="index"
          v-show="checkMimeTypeVideo(prufsObj.mimeType)">
-
       <div class="brutal-trabls-item-prufs__videos"
            >
+
+
+
         <div class="brutal-trabls-item-prufs__video-item">
           <img src="../../../../assets/image/video-file-svgrepo-com.svg"
                height="80"
@@ -81,8 +83,12 @@ export default defineComponent(
           return aaa
         }
 
-        function handlePrufsClick(src) {
-          emit('prufsClick', src)
+        function handlePrufsClick(imagesIndex) {
+          let dataFiltretion = computed(() => prufs.value.filter(function(mimeType) {return mimeType.mimeType.startsWith("image")} ))
+          const imagesData = new Object()
+          imagesData.images = dataFiltretion
+          imagesData.sourceIndex = imagesIndex
+          emit('prufsClick', imagesData)
         }
 
         return {
