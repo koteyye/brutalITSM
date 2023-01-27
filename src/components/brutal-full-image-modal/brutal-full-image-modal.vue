@@ -1,5 +1,5 @@
 <template>
-  <brutal-modal width="1080px" height="1080px" close="handleClose" :persistent="true">
+  <brutal-modal width="1080px" height="800px" close="handleClose" :persistent="true">
     <template #content>
       <div class="brutal-full-image-modal">
         <div class="brutal-full-image-modal__wrapper">
@@ -8,8 +8,12 @@
           </div>
         </div>
         <div class="brutal-full-image-modal__button">
-          <button @click="handleBack">Back</button>
-          <button @click="handleNext">Next</button>
+          <div class="brutal-full-image-modal__left" @click="handleBack">
+            <img src="../../assets/image/chevron-compact-left.svg" class="brutal-full-image-modal__icon"/>
+          </div>
+          <div class="brutal-full-image-modal__right" @click="handleNext">
+            <img src="../../assets/image/chevron-compact-right.svg" class="brutal-full-image-modal__icon"/>
+          </div>
         </div>
       </div>
     </template>
@@ -79,10 +83,29 @@ export default defineComponent(
     max-width: 1060px;
     max-height: 700px;
   }
-  &__button {
-    position: absolute;
-    bottom: 10px;
-    left: 45%
+  &__left {
+    position: fixed;
+    top: 350px;
+    left: -15px;
+    opacity: 0.05;
+    transition: .5s;
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+  &__right {
+    position: fixed;
+    top: 350px;
+    left: 979px;
+    opacity: 0.05;
+    transition: .5s;
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+
+  &__icon {
+    width: 250px;
   }
 }
 
