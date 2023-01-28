@@ -14,7 +14,7 @@
 
             :src="prufsObj.src"
             alt="img"
-            class="cursor-pointer"
+            class="cursor-pointer img"
             height="80"
             width="80"
             @click="handlePrufsClick(index)"/>
@@ -27,20 +27,13 @@
          v-for="(prufsObj, index) in prufs"
          :key="index"
          v-show="checkMimeTypeVideo(prufsObj.mimeType)">
-      <div class="brutal-trabls-item-prufs__videos"
-           >
-
-
-
+      <div class="brutal-trabls-item-prufs__videos">
         <div class="brutal-trabls-item-prufs__video-item">
           <img src="../../../../assets/image/video-file-svgrepo-com.svg"
                height="80"
                width="80"
-               @click="handleVideoClick"
-               class="cursor-pointer"/>
-          </div>
-          <div class="video-player-container">
-            <Vue3CanvasVideoPlayer :src="prufsObj.src"/>
+               @click="handlePrufsClick(index)"
+               class="cursor-pointer img"/>
           </div>
         </div>
       </div>
@@ -51,8 +44,6 @@
 <script>
 import {computed, defineComponent, onMounted, ref} from "vue";
 import {filepath} from "@/shared/path-names";
-import Vue3CanvasVideoPlayer from 'vue3-canvas-video-player';
-import 'vue3-canvas-video-player/dist/style.css'
 
 export default defineComponent(
     {
@@ -70,13 +61,12 @@ export default defineComponent(
         const objectPrufs = ref(props.trablInfo.prufs)
         const prufs = computed(() => props.trablInfo.map((item) => ({mimeType: item.mimeType, src: `${filepath}${item.s3}`})))
 
-        const fullImage = ref('')
-
         
         function checkMimeType(type) {
           const aaa = type.includes('image')
           return aaa
         }
+
 
         function checkMimeTypeVideo(type) {
           const aaa = type.includes('video')
@@ -84,19 +74,18 @@ export default defineComponent(
         }
 
         function handlePrufsClick(imagesIndex) {
-          let dataFiltretion = computed(() => prufs.value.filter(function(mimeType) {return mimeType.mimeType.startsWith("image")} ))
-          const imagesData = new Object()
-          imagesData.images = dataFiltretion
-          imagesData.sourceIndex = imagesIndex
-          emit('prufsClick', imagesData)
+          const contentData = new Object()
+          contentData.dataItem = prufs.value
+          contentData.sourceIndex = imagesIndex
+          emit('prufsClick', contentData)
         }
+
 
         return {
           checkMimeType,
           checkMimeTypeVideo,
           prufs,
-          handlePrufsClick,
-          fullImage
+          handlePrufsClick
         }
       }
     }
@@ -139,6 +128,10 @@ export default defineComponent(
   position: absolute;
   top: 0;
   left: 0;
+}
+
+.img {
+  border-radius: $radius*3;
 }
 
 </style>

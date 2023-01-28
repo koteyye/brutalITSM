@@ -1,18 +1,15 @@
 <template>
     <div class="brutal-trabls-item">
-      <div class="brutal-trabls-item__full-image-modal">
-
+      <div class="brutal-trabls-item__content-view">
           <brutal-full-image-modal
-              v-if="showFullImage"
+              v-if="showContentView"
               @close="handleCloseFullImage"
-              :image-files = images.images
-              :source-index = images.sourceIndex
-              :carousel = true
+              :files="content"
+              :source-index = sourceIndex
           />
-
       </div>
         <div
-            v-if="showFullImage !== true"
+            v-if="showContentView !== true"
             class="brutal-trabls-item__area-trabl">
             <div class="brutal-trabls-item__area-name header_text">
                 Трабл
@@ -79,30 +76,13 @@
             </div>
         </div>
     </div>
-
-
-
-<!--  <div-->
-<!--      v-show="fullImage"-->
-<!--      class="brutal-trabls-item__full-prufs">-->
-<!--    <img-->
-<!--      :src="fullImage"-->
-<!--      class="full-image"-->
-<!--      />-->
-<!--    <button class="full-image__close"-->
-<!--            @click="handleCloseFullImage"-->
-<!--    >-->
-<!--      <fa  icon="fa-solid fa-xmark"/>-->
-<!--    </button>-->
-<!--  </div>-->
-
 </template>
 
 
 
 
 <script>
-import { defineComponent, onMounted, ref } from 'vue';
+import {computed, defineComponent, onMounted, ref} from 'vue';
 import brutalButton from '@/components/button';
 import useModels from '@/composables/useModels';
 import { useRoute } from 'vue-router';
@@ -119,8 +99,11 @@ export default defineComponent(
         const btnMainInfo = ref(true)
         const btnPrufs = ref(false)
         const btnHistory = ref(false)
-        const images = ref('')
-        const showFullImage = ref(false)
+        // const images = ref(null)
+        // const videos = ref(null)
+        const content = ref([])
+        const sourceIndex = ref('')
+        const showContentView = ref(false)
         
         function handleSwitchSection(switcher) {
             if(switcher === 1) {
@@ -146,25 +129,38 @@ export default defineComponent(
         const {getTrablsById} = useModels(id)
 
 
-        function showFull(imageData) {
-          images.value = imageData
-          showFullImage.value = true
+        function showFull(contentData) {
+          //Добавить первоначальный индекс файла
+          let dataAndTrueIndex = computed (()=> contentData.dataItem.map((item, index) => ({mimeType: item.mimeType, src: item.src, trueIndex: index})))
+          //Фильтруем файлы на изображение и видео
+          // let dataFilterImage = computed(() => dataAndTrueIndex.value.filter(function(mimeType) {return mimeType.mimeType.startsWith("image")}))
+          // let dataFilterVideo = computed(() => dataAndTrueIndex.value.filter(function(mimeType) {return mimeType.mimeType.startsWith("video")}))
+          // images.value = dataFilterImage.value
+          // videos.value = dataFilterVideo.value
+          content.value = dataAndTrueIndex.value
+          console.log(content.value)
+          sourceIndex.value = contentData.sourceIndex
+          showContentView.value = true
         }
 
         function handleCloseFullImage() {
-          showFullImage.value = false
+          showContentView.value = false
         }
 
+
         return {
-            getTrablsById,
-            handleSwitchSection,
-            btnMainInfo,
-            btnPrufs,
-            btnHistory,
-            showFull,
-            images,
-            handleCloseFullImage,
-            showFullImage
+          getTrablsById,
+          handleSwitchSection,
+          btnMainInfo,
+          btnPrufs,
+          btnHistory,
+          showFull,
+          // images,
+          // videos,
+          sourceIndex,
+          handleCloseFullImage,
+          showContentView,
+          content
         }
     }
     }

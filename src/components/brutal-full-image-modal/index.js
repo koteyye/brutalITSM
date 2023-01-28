@@ -1,3 +1,3 @@
-import brutalFullImageModal from "@/components/brutal-full-image-modal/brutal-full-image-modal.vue";
+import brutalContentView from "@/components/brutal-full-image-modal/brutal-content-view.vue";
 
-export default brutalFullImageModal
+export default brutalContentView
