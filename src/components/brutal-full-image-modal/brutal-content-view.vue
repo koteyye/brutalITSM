@@ -61,13 +61,12 @@ export default defineComponent(
           }
         },
         sourceIndex: {
-          type: String,
-          default: ''
+          type: Number,
+          default: 0
         }
       },
       setup(props) {
         const dataIndex = ref(props.sourceIndex)
-
         const contentItem = ref('')
         const showImage = ref(false)
         const showVideo = ref(false)
@@ -78,40 +77,19 @@ export default defineComponent(
             ()=> findContentItem())
 
         function findContentItem() {
-          console.log(dataIndex)
           let findFile = computed(() => props.files.filter((item) => dataIndex.value === item.trueIndex))
           contentItem.value = findFile.value[0].src
           let contentType = findFile.value[0].mimeType
-          console.log(props.files.length)
           showImage.value = contentType.includes('image')
           showVideo.value = contentType.includes('video')
         }
 
-        // const videos = ref([])
-        // const images = ref([])
-
-        // onMounted(()=> createContentViewObj())
-        //
-        // function createContentViewObj() {
-        //   //Добавить первоначальный индекс файла
-        //   let dataAndTrueIndex = computed (()=> props.files.map((item, index) => ({mimeType: item.mimeType, src: item.src, trueIndex: index})))
-        //   //Фильтруем файлы на изображение и видео
-        //   let dataFilterImage = computed(() => dataAndTrueIndex.value.filter(function(mimeType) {return mimeType.mimeType.startsWith("image")}))
-        //   let dataFilterVideo = computed(() => dataAndTrueIndex.value.filter(function(mimeType) {return mimeType.mimeType.startsWith("video")}))
-        //   images.value = dataFilterImage
-        //   videos.value = dataFilterVideo
-        //   console.log(images.value)
-        //   console.log(dataIndex.value)
-        // }
-
         function handleNext() {
           dataIndex.value += 1
-          console.log(dataIndex.value)
         }
 
         function handleBack() {
           dataIndex.value -= 1
-          console.log(dataIndex.value)
         }
 
 

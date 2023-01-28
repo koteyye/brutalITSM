@@ -99,8 +99,6 @@ export default defineComponent(
         const btnMainInfo = ref(true)
         const btnPrufs = ref(false)
         const btnHistory = ref(false)
-        // const images = ref(null)
-        // const videos = ref(null)
         const content = ref([])
         const sourceIndex = ref('')
         const showContentView = ref(false)
@@ -132,13 +130,7 @@ export default defineComponent(
         function showFull(contentData) {
           //Добавить первоначальный индекс файла
           let dataAndTrueIndex = computed (()=> contentData.dataItem.map((item, index) => ({mimeType: item.mimeType, src: item.src, trueIndex: index})))
-          //Фильтруем файлы на изображение и видео
-          // let dataFilterImage = computed(() => dataAndTrueIndex.value.filter(function(mimeType) {return mimeType.mimeType.startsWith("image")}))
-          // let dataFilterVideo = computed(() => dataAndTrueIndex.value.filter(function(mimeType) {return mimeType.mimeType.startsWith("video")}))
-          // images.value = dataFilterImage.value
-          // videos.value = dataFilterVideo.value
           content.value = dataAndTrueIndex.value
-          console.log(content.value)
           sourceIndex.value = contentData.sourceIndex
           showContentView.value = true
         }
@@ -155,8 +147,6 @@ export default defineComponent(
           btnPrufs,
           btnHistory,
           showFull,
-          // images,
-          // videos,
           sourceIndex,
           handleCloseFullImage,
           showContentView,
