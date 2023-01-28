@@ -1,5 +1,5 @@
 <template>
-  <brutal-modal width="1080px" height="800px" close="handleClose" :persistent="true">
+  <brutal-modal width="1080px" height="800px">
     <template #content>
       <div class="brutal-content-modal">
         <div class="brutal-content-modal__wrapper">
@@ -28,12 +28,12 @@
         </div>
         <div class="brutal-content-modal__button">
           <div
-              v-show="dataIndex !== 0"
+              v-if="dataIndex !== 0"
               class="brutal-content-modal__left" @click="handleBack">
             <img src="../../assets/image/chevron-compact-left.svg" class="brutal-content-modal__icon"/>
           </div>
           <div
-              v-show="dataIndex !== (files.length - 1)"
+              v-if="dataIndex !== (files.length - 1)"
               class="brutal-content-modal__right" @click="handleNext">
             <img src="../../assets/image/chevron-compact-right.svg" class="brutal-content-modal__icon"/>
           </div>

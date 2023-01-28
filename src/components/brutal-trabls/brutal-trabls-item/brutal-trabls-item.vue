@@ -100,7 +100,7 @@ export default defineComponent(
         const btnPrufs = ref(false)
         const btnHistory = ref(false)
         const content = ref([])
-        const sourceIndex = ref('')
+        const sourceIndex = ref(0)
         const showContentView = ref(false)
         
         function handleSwitchSection(switcher) {
