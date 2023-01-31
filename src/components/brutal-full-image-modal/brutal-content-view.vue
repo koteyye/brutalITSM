@@ -77,9 +77,9 @@ export default defineComponent(
             ()=> findContentItem())
 
         function findContentItem() {
-          let findFile = computed(() => props.files.filter((item) => dataIndex.value === item.trueIndex))
+          const findFile = props.files.filter((item) => dataIndex.value === item.trueIndex)
           contentItem.value = findFile.value[0].src
-          let contentType = findFile.value[0].mimeType
+          const contentType = findFile.value[0].mimeType
           showImage.value = contentType.includes('image')
           showVideo.value = contentType.includes('video')
         }
