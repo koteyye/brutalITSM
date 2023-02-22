@@ -6,7 +6,7 @@
     <div class="brutal-trabls-item-prufs__images-files"
          v-for="(prufsObj, index) in prufs"
          :key="index"
-         v-show="checkMimeType(prufsObj.mimeType)">
+         v-show="checkMimeType(prufsObj.mimeType, 'image')">
 
 
       <div class="brutal-trabls-item-prufs__images">
@@ -26,7 +26,7 @@
       <div class="brutal-trabls-item-prufs__video-files"
          v-for="(prufsObj, index) in prufs"
          :key="index"
-         v-show="checkMimeTypeVideo(prufsObj.mimeType)">
+         v-show="checkMimeType(prufsObj.mimeType, 'video')">
       <div class="brutal-trabls-item-prufs__videos">
         <div class="brutal-trabls-item-prufs__video-item">
           <img src="../../../../assets/image/video-file-svgrepo-com.svg"
@@ -62,28 +62,22 @@ export default defineComponent(
         const prufs = computed(() => props.trablInfo.map((item) => ({mimeType: item.mimeType, src: `${filepath}${item.s3}`})))
 
         
-        function checkMimeType(type) {
-          const aaa = type.includes('image')
-          return aaa
-        }
-
-
-        function checkMimeTypeVideo(type) {
-          const aaa = type.includes('video')
-          return aaa
+        function checkMimeType(type, currentType) {
+          const resultMimeType = type.includes(currentType)
+          return resultMimeType
         }
 
         function handlePrufsClick(imagesIndex) {
-          const contentData = new Object()
-          contentData.dataItem = prufs.value
-          contentData.sourceIndex = imagesIndex
+          const contentData = {
+            dataItem: prufs.value,
+            sourceIndex: imagesIndex
+          }
           emit('prufsClick', contentData)
         }
 
 
         return {
           checkMimeType,
-          checkMimeTypeVideo,
           prufs,
           handlePrufsClick
         }
