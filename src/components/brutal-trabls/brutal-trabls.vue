@@ -33,9 +33,10 @@ import { defineComponent, onMounted, ref, watch } from 'vue';
 import brutalButton from '../button/brutal-button.vue';
 import BrutalTrablsTableHeader from './brutal-trabls-table-header';
 import BrutalTrablsTableRow from './brutal-trabls-table-row/brutal-trabls-table-row.vue';
-import useModel from '../../composables/useModels'
+import useModel from '../../composables/./useTrabls'
 import { RoutesNames } from '@/shared';
 import { useRouter } from 'vue-router';
+import useTrabls from "../../composables/./useTrabls";
 
 export default defineComponent(
   {
@@ -48,7 +49,7 @@ export default defineComponent(
       const id = ref('')
       const router = useRouter()
 
-      const { getTrabls, getTrablsArch } = useModel()
+      const { getTrabls, getTrablsArch } = useTrabls()
 
       watch(
     () => getTrabls.value,

@@ -41,6 +41,16 @@ const routes = [
         path: '/createTrabl/:id',
         name: RoutesNames.CreateTrabl,
         component: () => import('./components/brutal-catalog-trabl/brutal-create-trabl/brutal-create-trabl.vue')
+    },
+    {
+        path: '/admin',
+        name: RoutesNames.AdminPanel,
+        component: () => import('./components/brutal-admin-panel/brutal-admin-panel.vue')
+    },
+    {
+        path: '/auth',
+        name: RoutesNames.Auth,
+        component: () => import('./components/brutal-auth/brutal-auth.vue')
     }
 ]
 

@@ -84,7 +84,7 @@
 <script>
 import {computed, defineComponent, onMounted, ref} from 'vue';
 import brutalButton from '@/components/button';
-import useModels from '@/composables/useModels';
+import useTrabls from '@/composables/useTrabls';
 import { useRoute } from 'vue-router';
 import brutalTrablsItemPrufs from "@/components/brutal-trabls/brutal-trabls-item/brutal-trabls-item-prufs";
 import brutalFullImageModal from "@/components/brutal-full-image-modal";
@@ -124,7 +124,7 @@ export default defineComponent(
 
         onMounted(() => id.value = route.params.id)
         
-        const {getTrablsById} = useModels(id)
+        const {getTrablsById} = useTrabls(id)
 
 
         function showFull(contentData) {

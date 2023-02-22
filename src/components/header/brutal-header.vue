@@ -6,7 +6,7 @@
         <span class="brutalITSM__title">Brutal ITSM</span>
       </div>
     </div>
-    <div class="brutalITSM__menu">
+    <div v-if="isNotAdmin" class="brutalITSM__menu">
       <div class="title cursor-pointer myrequest" @click="handleTrabls">Мои траблы</div>
       <div class="title cursor-pointer stukach" @click="handleTrablCatalog">Каталог траблов</div>
       <div class="title cursor-pointer otziv" @click="handleFeedback">Анонимные отзывы обо мне от исполнителей</div>
@@ -16,14 +16,20 @@
           <brutal-button icon="fa-solid fa-person-walking-dashed-line-arrow-right" @onClick="testF(value=1)"/>
         </div>
       </div>
-
+    </div>
+    <div v-if="isAdmin" class="brutalITSM__menu">
+      <div class="cursor-pointer nahui">
+        <div class="nahui">
+          <brutal-button icon="fa-solid fa-person-walking-dashed-line-arrow-right" @onClick="testF(value=1)"/>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import brutalButton from "@/components/button/brutal-button.vue";
-import {defineComponent} from "vue";
+import {computed, defineComponent} from "vue";
 import {useRoute, useRouter} from "vue-router";
 import {RoutesNames} from "@/shared";
 
@@ -32,6 +38,9 @@ export default defineComponent( {
   components: {brutalButton},
   setup() {
     const router = useRouter()
+    const route = useRoute()
+    const isNotAdmin = computed(() => route.name !== RoutesNames.AdminPanel)
+    const isAdmin = computed(() => route.name === RoutesNames.AdminPanel)
 
     function handleTrablCatalog() {
       router.push({name: RoutesNames.CatalogTrabl})
@@ -53,7 +62,7 @@ export default defineComponent( {
     }
 
     return {
-      handleFeedback, handleRating, handleTrabls, handleTrablCatalog, handleLogoClick, testF
+      handleFeedback, handleRating, handleTrabls, handleTrablCatalog, handleLogoClick, testF, isNotAdmin, isAdmin
     }
   }
 })

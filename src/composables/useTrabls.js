@@ -1,7 +1,7 @@
-import { fetchTrabl, fetchTrablById, fetchTrablsArch } from '@/api/models'
+import { fetchTrabl, fetchTrablById, fetchTrablsArch } from '@/api/trabls'
 import { onMounted, ref, watch } from 'vue'
 
-export default function useModels(idRef) {
+export default function useTrabls(idRef) {
     const getTrabls = ref([])
     const getTrablsArch = ref([])
     const getTrablsById = ref([])

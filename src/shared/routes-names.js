@@ -6,5 +6,7 @@ export const RoutesNames = {
     Feedback: 'Feedback',
     AntiRating: 'AntiRating',
     ServiceItem: 'ServiceItem',
-    CreateTrabl: 'CreateTrabl'
+    CreateTrabl: 'CreateTrabl',
+    AdminPanel: 'AdminPanel',
+    Auth: 'Auth',
 }
