@@ -1,9 +1,9 @@
 <template>
 <div class="brutal-auth">
   <div class="brutal-auth__login">
-    <p style="margin-right: 69px">Логин</p>
+    <p class="text" style="margin-right: 69px">Логин</p>
     <input v-model="login" type="login" class="brutal-auth__input" :class="{'brutal-auth__inputerror': isError}"/>
-    <p style="margin-right: 69px">Пароль</p>
+    <p class="text"  style="margin-right: 69px">Пароль</p>
     <input v-model="password" type="password" class="brutal-auth__input" :class="{'brutal-auth__inputerror': isError}"/>
   </div>
   <div class="brutal-auth__btn">
@@ -16,9 +16,9 @@
 
 <script>
 import BrutalButton from "@/components/button/brutal-button.vue";
-import {computed, defineComponent, ref, watch} from "vue";
+import {computed, defineComponent, ref, watch, reactive} from "vue";
 import {useRouter} from "vue-router";
-import {useAuth} from "../../composables/./useAuth"
+import {userServiceUrl} from "@/shared/path-names";
 
 export default defineComponent({
   name: "brutal-auth.vue",
@@ -47,17 +47,27 @@ export default defineComponent({
     }
 
     async function clickEnter() {
-      const{postAuth} = useAuth(login, password)
-      watch(
-          () => postAuth.value,
-          (value) => console.log(value)
-      )
+      const isValid = validateFields()
+      if (!isValid) {
+        errorMessage.value = 'Необходимо ввести логин и пароль'
+      }
+      const data = {login: login.value, password: password.value}
+      const response = await fetch(`${userServiceUrl}/auth/sign-in`, {
+        method: 'POST',
+        credentials: 'include',
+        body: JSON.stringify(data)
+      })
+      if (!response.ok) {
+        isResponseError.value = true
+        return
+      }
+      console.log(response)
     }
 
 
     return {
       login, password, //v-models
-      isError, isResponseError, //messages
+      isError, isResponseError, errorMessage, //messages
       clickEnter //clicks
 
     }
@@ -68,6 +78,8 @@ export default defineComponent({
 <style lang="scss" scoped>
 @import '../../assets/styles/main';
 .brutal-auth {
+  position: absolute;
+  left: 40%;
   text-align: center;
   height: 100%;
   display: flex;
@@ -83,6 +95,8 @@ export default defineComponent({
   &__input {
     border-radius: $radius*3;
     padding-left: 20px;
+    background-color: #778899;
+    font-family: MornningBreeze;
   }
   &__btn {
     margin-top: 15px;
@@ -96,6 +110,11 @@ export default defineComponent({
   &__inputerror {
     border: 1px solid #FF0000;
   }
+}
+
+.field-name {
+  font-family: MornningBreeze;
+  font-size: 20px;
 }
 
 </style>

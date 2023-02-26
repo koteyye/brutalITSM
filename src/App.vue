@@ -1,6 +1,8 @@
 <template>
       <div id="app" class="background">
+        <div v-if="isNotAuth">
         <brutalHeader />
+        </div>
         <div class="app-main-page">
           <router-view/>
         </div>
@@ -10,7 +12,9 @@
 
 <script>
 import brutalHeader from '@/components/header'
-import { defineComponent } from 'vue';
+import {computed, defineComponent} from 'vue';
+import {useRoute} from "vue-router";
+import {RoutesNames} from "@/shared";
 
 export default defineComponent(
   {
@@ -18,6 +22,9 @@ export default defineComponent(
   components: {brutalHeader},
   setup() {
     document.title = 'BrutalITSM'
+    const route = useRoute()
+    const isNotAuth = computed(() => route.name !== RoutesNames.Auth)
+    return {isNotAuth}
   }
 }
 ) 
