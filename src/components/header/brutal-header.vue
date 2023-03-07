@@ -2,7 +2,6 @@
   <div class="brutalITSM justify-space-between align-center">
     <div class="brutalITSM__header">
       <div class="brutalITSM__logo cursor-pointer" @click="handleLogoClick">
-        <img src="../../assets/image/logo.png" alt="Говнолого" height="50" width="310">
         <span class="brutalITSM__title">Brutal ITSM</span>
       </div>
     </div>

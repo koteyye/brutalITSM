@@ -1,5 +1,6 @@
 <template>
 <div class="brutal-auth">
+  <span class="brutalITSM__title">Brutal ITSM</span>
   <form class="card" @submit.prevent="submit">
 
     <div class="brutal-auth__login">
@@ -122,6 +123,11 @@ export default defineComponent({
 <style lang="scss" scoped>
 @import '../../assets/styles/main';
 
+.brutalITSM__title {
+  position: absolute;
+  top: 20%;
+  font-size: 60px;
+}
 
 .brutal-auth {
   position: absolute;
