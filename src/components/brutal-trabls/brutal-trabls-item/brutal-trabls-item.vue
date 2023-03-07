@@ -84,7 +84,7 @@
 <script>
 import {computed, defineComponent, onMounted, ref} from 'vue';
 import brutalButton from '@/components/button';
-import useTrabls from '@/composables/useTrabls';
+import useTrabls from '@/use/useTrabls';
 import { useRoute } from 'vue-router';
 import brutalTrablsItemPrufs from "@/components/brutal-trabls/brutal-trabls-item/brutal-trabls-item-prufs";
 import brutalFullImageModal from "@/components/brutal-full-image-modal";
