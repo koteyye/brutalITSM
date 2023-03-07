@@ -12,14 +12,14 @@
       <div class="title cursor-pointer reiting" @click="handleRating">АнтиРейтинг</div>
       <div class="cursor-pointer nahui">
         <div class="nahui">
-          <brutal-button icon="fa-solid fa-person-walking-dashed-line-arrow-right" @onClick="testF(value=1)"/>
+          <brutal-button icon="fa-solid fa-person-walking-dashed-line-arrow-right" @click="logout"/>
         </div>
       </div>
     </div>
     <div v-if="isAdmin" class="brutalITSM__menu">
       <div class="cursor-pointer nahui">
         <div class="nahui">
-          <brutal-button icon="fa-solid fa-person-walking-dashed-line-arrow-right" @onClick="testF(value=1)"/>
+          <brutal-button icon="fa-solid fa-person-walking-dashed-line-arrow-right" @click="logout"/>
         </div>
       </div>
     </div>
@@ -31,6 +31,7 @@ import brutalButton from "@/components/button/brutal-button.vue";
 import {computed, defineComponent} from "vue";
 import {useRoute, useRouter} from "vue-router";
 import {RoutesNames} from "@/shared";
+import {useInfoToast} from "@/plugins/toasts/toasts";
 
 export default defineComponent( {
   name: "brutalHeader",
@@ -56,12 +57,14 @@ export default defineComponent( {
     function handleLogoClick() {
       router.push({name: RoutesNames.Main})
     }
-    function testF(value) {
-      console.log(value)
+    function logout() {
+      localStorage.clear()
+      useInfoToast('Ты вышел из меня, ущерб!')
+      router.push({name: RoutesNames.Auth})
     }
 
     return {
-      handleFeedback, handleRating, handleTrabls, handleTrablCatalog, handleLogoClick, testF, isNotAdmin, isAdmin
+      handleFeedback, handleRating, handleTrabls, handleTrablCatalog, handleLogoClick, logout, isNotAdmin, isAdmin
     }
   }
 })

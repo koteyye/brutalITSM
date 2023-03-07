@@ -1,16 +1,17 @@
 import {useFetch} from "@/use/fetch";
 import {userServiceUrl} from "@/shared/path-names";
-import {onErrorCaptured, ref} from 'vue'
+import {ref} from 'vue'
+import {useSuccessToast} from "@/plugins/toasts/toasts";
 
 export async function useAuth(init) {
     const errorMessage = ref('')
     const invalid = 'sql: no rows in result set'
+    const completeAuth = ref(false)
     const options = {
         method: 'POST',
         credentials: 'include',
         body: JSON.stringify(init)
     }
-    const error = ref('')
 
     const loaded = ref(false)
     const {response: token, request} = useFetch(`${userServiceUrl}/auth/sign-in`, options)
@@ -20,13 +21,20 @@ export async function useAuth(init) {
         loaded.value = true
     }
 
-    if (token.value.message === invalid) {
-        errorMessage.value = 'Неверно введен логин или пароль, идиот!'
+    if (!token.value.token) {
+        if (token.value.message === invalid) {
+            errorMessage.value = 'Неверно введен логин или пароль, идиот!'
         }
+        else {
+            errorMessage.value = 'В настоящий момент сервис недоступен'
+        }
+    }
     else {
-        errorMessage.value = 'В настоящий момент сервис недоступен'
-        }
+        localStorage.setItem('token', token.value.token)
+        completeAuth.value = true
+        useSuccessToast('Ты успешно вошел в меня')
+    }
 
 
-    return {token, errorMessage}
+    return {token, errorMessage, completeAuth}
 }

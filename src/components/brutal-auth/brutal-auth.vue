@@ -28,6 +28,7 @@ import {useRouter} from "vue-router";
 import {userServiceUrl} from "@/shared/path-names";
 import {useForm} from "@/use/form"
 import {useAuth} from "@/use/auth";
+import {RoutesNames} from "@/shared";
 
 const required = val => !!val
 const minLength = num => val => val.length >= num
@@ -37,6 +38,7 @@ export default defineComponent({
   components: {BrutalButton},
   setup() {
 
+    const router = useRouter()
     const error = ref()
     const form = useForm({
       login: {
@@ -49,14 +51,15 @@ export default defineComponent({
       }
     })
 
-    console.log(form.password)
-
     async function submit() {
-      const {token, errorMessage} = await useAuth({
+      const {token, errorMessage, completeAuth} = await useAuth({
         login: form.login.value,
         password: form.password.value
       })
       error.value = errorMessage.value
+      if (completeAuth) {
+        router.push({name: RoutesNames.Main})
+      }
     }
 
 
@@ -163,6 +166,8 @@ export default defineComponent({
     border: 1px solid #FF0000;
   }
   &__text-error {
+    position: absolute;
+    left: 20%;
     color: #FF0000;
     text-align: center;
     font-family: MornningBreeze;
