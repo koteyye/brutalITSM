@@ -68,57 +68,6 @@ export default defineComponent({
       submit,
       error
     }
-
-
-
-
-    // const router = useRouter()
-    //
-    // const login = ref('')
-    // const password = ref('')
-    // const errorMessage = ref(null)
-    // const isResponseError = ref(false)
-    //
-    // const isError = computed(() => errorMessage.value !== '')
-    //
-    // watch(
-    //     [login, password],
-    //     ([loginValue, passwordValue]) => {
-    //       if (loginValue !== '' || passwordValue !== '') {
-    //         errorMessage.value = ''
-    //       }
-    //     }
-    // )
-    //
-    // function validateFields() {
-    //   return login.value.trim() != '' || password.value.trim() != ''
-    // }
-    //
-    // async function clickEnter() {
-    //   const isValid = validateFields()
-    //   if (!isValid) {
-    //     errorMessage.value = 'Необходимо ввести логин и пароль'
-    //   }
-    //   const data = {login: login.value, password: password.value}
-    //   const response = await fetch(`${userServiceUrl}/auth/sign-in`, {
-    //     method: 'POST',
-    //     credentials: 'include',
-    //     body: JSON.stringify(data)
-    //   })
-    //   if (!response.ok) {
-    //     isResponseError.value = true
-    //     return
-    //   }
-    //   localStorage.acc
-    // }
-    //
-    //
-    // return {
-    //   login, password, //v-models
-    //   isError, isResponseError, errorMessage, //messages
-    //   clickEnter //clicks
-    //
-    // }
   }
 })
 </script>
@@ -134,7 +83,7 @@ export default defineComponent({
 
 .brutal-auth {
   position: absolute;
-  left: 40%;
+  left: 35%;
   text-align: center;
   height: 100%;
   display: flex;

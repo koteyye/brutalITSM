@@ -10,6 +10,10 @@
       <div class="title cursor-pointer stukach" @click="handleTrablCatalog">Каталог траблов</div>
       <div class="title cursor-pointer otziv" @click="handleFeedback">Анонимные отзывы обо мне от исполнителей</div>
       <div class="title cursor-pointer reiting" @click="handleRating">АнтиРейтинг</div>
+      <div class="avatar">
+        <img class="avatar__img cursor-pointer" :src="userImg" alt="avatar" height="70" width="70" @click="handleImgClick" @error="handleImgError">
+        <span class="avatar__title">{{userName}}</span>
+      </div>
       <div class="cursor-pointer nahui">
         <div class="nahui">
           <brutal-button icon="fa-solid fa-person-walking-dashed-line-arrow-right" @click="logout"/>
@@ -17,6 +21,10 @@
       </div>
     </div>
     <div v-if="isAdmin" class="brutalITSM__menu">
+      <div class="avatar">
+        <img class="avatar__img cursor-pointer" :src="userImg" alt="avatar" height="70" width="70" @click="handleImgClick" @error="handleImgError">
+        <span class="avatar__title">{{userName}}</span>
+      </div>
       <div class="cursor-pointer nahui">
         <div class="nahui">
           <brutal-button icon="fa-solid fa-person-walking-dashed-line-arrow-right" @click="logout"/>
@@ -32,6 +40,8 @@ import {computed, defineComponent} from "vue";
 import {useRoute, useRouter} from "vue-router";
 import {RoutesNames} from "@/shared";
 import {useInfoToast} from "@/plugins/toasts/toasts";
+import {userInfo} from "@/plugins/router/auth-guard";
+import {s3url} from "@/shared/path-names";
 
 export default defineComponent( {
   name: "brutalHeader",
@@ -41,6 +51,18 @@ export default defineComponent( {
     const route = useRoute()
     const isNotAdmin = computed(() => route.name !== RoutesNames.AdminPanel)
     const isAdmin = computed(() => route.name === RoutesNames.AdminPanel)
+
+
+    const userName = userInfo.value.lastname + ' ' + userInfo.value.firstname
+    const avaPath = userInfo.value.avatar.backetName + '/' + userInfo.value.avatar.fileName
+
+    const userImg = computed(() => avaPath != null ? `${s3url}/${avaPath}` : '')
+
+    function handleImgError(e) {
+      const target = e.target
+      target.onerror = null
+      target.src = '/images/nophoto.jpg'
+    }
 
     function handleTrablCatalog() {
       router.push({name: RoutesNames.CatalogTrabl})
@@ -64,7 +86,17 @@ export default defineComponent( {
     }
 
     return {
-      handleFeedback, handleRating, handleTrabls, handleTrablCatalog, handleLogoClick, logout, isNotAdmin, isAdmin
+      handleFeedback,
+      handleRating,
+      handleTrabls,
+      handleTrablCatalog,
+      handleLogoClick,
+      logout,
+      handleImgError,
+      isNotAdmin,
+      isAdmin,
+      userImg,
+      userName
     }
   }
 })
@@ -102,8 +134,26 @@ export default defineComponent( {
   }
 }
 
+.avatar {
+  margin: auto 20px;
+  padding: 10px 25px;
+  display: grid;
+  place-items: center;
+  &__img {
+    border-radius: 100%;
+    border: solid 2px rgba(67, 117, 131, 0.99);
+  }
+  &__title {
+    color: $--color-text;
+    font-family: MorningBreeze-Light;
+    font-size: 15px;
+    text-align: center;
+  }
+}
+
 .nahui {
   margin-left: 10px;
+  margin-top: 10px;
   position: sticky;
   padding: 5px 2px;
 }

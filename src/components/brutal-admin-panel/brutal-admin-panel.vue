@@ -5,21 +5,69 @@
         <span>Меню</span>
       </div>
       <div class="left-menu__items">
-        <span class="left-menu__item cursor-pointer">Пользователи</span>
-        <span class="left-menu__item cursor-pointer">Создать пользователя</span>
+        <span class="left-menu__item cursor-pointer" @click="handleUsers">Пользователи</span>
+        <span class="left-menu__item cursor-pointer" @click="handleCreateUser">Создать пользователя</span>
       </div>
     </div>
-    <div class="brutal-admin__work-area">123</div>
+    <div class="brutal-admin__work-area">
+      <div v-show="workArea === 'users'" class="user-list">
+        <div class="user-list-header flex justify-space-between">
+          <span class="avatar"> </span>
+          <span class="login">Логин</span>
+          <span class="username">ФИО</span>
+          <span class="job">Должность</span>
+          <span class="org">Подразделение</span>
+        </div>
+        <brutal-admin-panel-user-list
+            v-for="(user, id) in users"
+            :key="id"
+            :users="user"/>
+      </div>
+
+      <div v-show="workArea === 'createUser'" class="create-user">
+
+      </div>
+
+    </div>
   </div>
 </template>
 
 <script>
-import {defineComponent} from "vue";
+import {defineComponent, onMounted, ref} from "vue";
+import {useUser} from "@/use/user";
+import brutalAdminPanelUserList
+  from "@/components/brutal-admin-panel/brutal-admin-user-list/brutal-admin-panel-user-list.vue";
 
 export default defineComponent({
   name: "brutal-admin-panel",
+  components: {brutalAdminPanelUserList},
   setup() {
     document.title = 'brutalITSM-admin-panel'
+
+    const users = ref([])
+    const workArea = ref('users')
+
+    onMounted(async()=> await getUsers())
+
+    async function getUsers() {
+      const {userList} = await useUser()
+      users.value = userList.value
+      console.log(users.value)
+    }
+
+    function handleUsers() {
+      workArea.value = 'users'
+    }
+    function handleCreateUser() {
+      workArea.value = 'createUser'
+    }
+
+    return {
+      users,
+      handleUsers,
+      handleCreateUser,
+      workArea
+    }
   }
 })
 </script>
@@ -28,11 +76,11 @@ export default defineComponent({
 @import '../../assets/styles/main.scss';
 .brutal-admin {
   margin-top: 40px;
-  margin-left: 5px;
+  margin-left: 20px;
   margin-right: 5px;
   display: flex;
   flex-wrap: wrap;
-  width: 95%;
+  width: 98%;
   height: 100%;
   &__left-menu {
     flex-basis: 20%;
@@ -71,5 +119,27 @@ export default defineComponent({
   }
 }
 
+.user-list-header {
+  margin: auto 10px;
+  text-align: center;
+  font-family: MorningBreeze-Bold;
+  font-size: 20px;
+  border-bottom: solid 2px rgba(113, 146, 152, 0.7);
+}
+.avatar {
+  width: 50px;
+}
+.login {
+  flex-basis: 10%;
+}
+.username {
+  flex-basis: 40%;
+}
+.job {
+  flex-basis: 20%;
+}
+.org {
+  flex-basis: 20%;
+}
 
 </style>

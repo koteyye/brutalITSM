@@ -31,7 +31,8 @@ export async function useAuth(init) {
     }
     else {
         localStorage.setItem('token', token.value.token)
-        completeAuth.value = true
+        setTimeout(completeAuth.value = true, 1000)
+
         useSuccessToast('Ты успешно вошел в меня')
     }
 
