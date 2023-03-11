@@ -2,7 +2,6 @@ import {ref} from 'vue'
 
 export function useFetchConfig(met) {
     const token = localStorage.getItem('token')
-    console.log(token)
     const fetchConfig = {
         headers: {
             Authorization: 'Bearer ' + token,
@@ -20,6 +19,7 @@ export function useFetch(url, options) {
         const res = await fetch(url, options)
         response.value = await res.json()
     }
+
 
 
     return {response, request}

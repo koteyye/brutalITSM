@@ -1,5 +1,5 @@
 import {useFetch} from "@/use/fetch";
-import {userServiceUrl} from "@/shared/path-names";
+import {service} from "@/shared/path-names";
 import {ref} from 'vue'
 import {useSuccessToast} from "@/plugins/toasts/toasts";
 
@@ -14,7 +14,7 @@ export async function useAuth(init) {
     }
 
     const loaded = ref(false)
-    const {response: token, request} = useFetch(`${userServiceUrl}/auth/sign-in`, options)
+    const {response: token, request} = useFetch(`${service.userService}/auth/sign-in`, options)
 
     if (!loaded.value) {
         await request()

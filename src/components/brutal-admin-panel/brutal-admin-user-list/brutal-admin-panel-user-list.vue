@@ -28,7 +28,6 @@ export default defineComponent({
     }
   },
   setup(props) {
-    console.log(props.users)
 
     const avaPath = props.users.avatar.backetName + '/' + props.users.avatar.fileName
     const userImg = computed(() => avaPath != null ? `${s3url}/${avaPath}` : '')

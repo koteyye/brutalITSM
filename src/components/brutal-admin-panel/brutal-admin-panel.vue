@@ -25,7 +25,7 @@
       </div>
 
       <div v-show="workArea === 'createUser'" class="create-user">
-
+        <brutal-admin-create-user></brutal-admin-create-user>
       </div>
 
     </div>
@@ -37,10 +37,11 @@ import {defineComponent, onMounted, ref} from "vue";
 import {useUser} from "@/use/user";
 import brutalAdminPanelUserList
   from "@/components/brutal-admin-panel/brutal-admin-user-list/brutal-admin-panel-user-list.vue";
+import brutalAdminCreateUser from "@/components/brutal-admin-panel/brutal-admin-create-user";
 
 export default defineComponent({
   name: "brutal-admin-panel",
-  components: {brutalAdminPanelUserList},
+  components: {brutalAdminPanelUserList, brutalAdminCreateUser},
   setup() {
     document.title = 'brutalITSM-admin-panel'
 
@@ -52,7 +53,6 @@ export default defineComponent({
     async function getUsers() {
       const {userList} = await useUser()
       users.value = userList.value
-      console.log(users.value)
     }
 
     function handleUsers() {

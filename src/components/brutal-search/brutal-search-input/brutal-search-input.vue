@@ -3,10 +3,10 @@
     <input
         v-if="emptySelected"
         type="text"
-        placeholder="Вводи пользака"
+        :placeholder="placeHolderText"
         class="search-input"
-        :value="query"
         @input="$emit('update:query', $event.target.value)"
+        :value="query"
     >
     <div v-else class="search-input__selected">
       {{selectedValue}}
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import {computed, defineComponent} from "vue";
+import {computed, defineComponent, reactive, ref} from "vue";
 
 export default defineComponent({
   name: "brutalSearchInput",
@@ -30,6 +30,12 @@ export default defineComponent({
     selectedValue: {
       type: Object,
       default: null
+    },
+    placeHolderText: {
+      type: String,
+      default(){
+        return ''
+      }
     }
   },
   emits: ['update:query', 'update:selectedValue'],

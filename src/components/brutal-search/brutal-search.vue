@@ -2,8 +2,9 @@
   <div class="brutal-search">
     <div class="input1">
       <brutal-search-input
-          v-model:query="query"
+          v-model:query="searchParam.query"
           v-model:selected-value="selectedValue"
+          :place-holder-text="placeholderText"
       />
     </div>
     <div class="result1">
@@ -15,18 +16,31 @@
 </template>
 
 <script>
-import {defineComponent, ref, watch} from "vue";
+import {defineComponent, reactive, ref, watch} from "vue";
 import brutalSearchResult from "@/components/brutal-search/brutal-search-result/brutal-search-result.vue";
 import BrutalSearchInput from "@/components/brutal-search/brutal-search-input/brutal-search-input.vue";
+import {useSearch} from "@/use/search";
 
 export default defineComponent({
   name: "BrutalSearch",
   components: {BrutalSearchInput, brutalSearchResult},
   props: {
+    searchOptions: {
+      type: Object,
+      default() {
+        return {}
+      }
+    },
     searchResult: {
       type: Array,
       default() {
         return []
+      }
+    },
+    placeholderText: {
+      type: String,
+      default() {
+        return ''
       }
     }
   },
@@ -37,16 +51,43 @@ export default defineComponent({
     const selectedValue = ref(null)
     const Selected = ref(false)
     const searchResultTrue = ref([])
-    watch( ()=> query.value,
-        () => search()
+    const searchResult = []
+    const errMessage = ''
+
+
+    const searchParam = ref({
+      service: props.searchOptions.service,
+      searchObject: props.searchOptions.searchObject,
+      query: query.value
+    })
+
+    watch( ()=> searchParam.value.query,
+        async () => {
+          const {result, err} = await useSearch(searchParam)
+          writeResult(result, err)
+        }
     )
-    function search() {
-      emit('SearchRequest', query.value)
+
+    async function getResult(result, err) {
+      searchResult.value = result.value
+      errMessage.value = err.value
     }
+    console.log(searchResult.value)
+    console.log(errMessage.value)
+
+
+    function showResult(result) {
+      result.value = result
+      console.log(result)
+    }
+
+
+
     watch(() => props.searchResult,
         () => writeResult())
-    function writeResult() {
-      searchResultTrue.value = props.searchResult
+    function writeResult(searchResult) {
+      searchResultTrue.value = searchResult
+      console.log(searchResultTrue.value)
     }
     function clearQuery() {
       query.value = ''
@@ -62,6 +103,7 @@ export default defineComponent({
       emit('update:search-result', [])
     }
     return {
+      searchParam,
       query, isSearchInputFocused, onSelectedValue, selectedValue, Selected, clearSelected
     }
   }

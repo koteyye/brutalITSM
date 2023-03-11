@@ -22,6 +22,7 @@
             <brutal-search
                 v-model:search-result="searchResult"
                 @searchRequest="onQuery"
+                :placeholder-text="placeholders"
             />
           </div>
         </div>
@@ -86,6 +87,9 @@ export default defineComponent({
     brutalButton, brutalSearch, brutalUploader, brutalCreateTrablModal
   },
   setup() {
+    const placeholders = {
+      InterestFace: 'Введи лицо'
+    }
     const router = useRouter()
     const typeItemName = useLocalStorage('TrablTypeName', '')
     const typeItemId = useLocalStorage('TrablTypeId', '')
@@ -217,6 +221,7 @@ export default defineComponent({
       query,
       searchResult,
       onQuery,
+      placeholders,
 
       //uploader:
       loadFiles,
