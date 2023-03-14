@@ -1,6 +1,7 @@
 <template>
 <div class="brutal-auth">
-  <span class="brutalITSM__title">Brutal ITSM</span>
+<!--  <span class="brutalITSM__title">Brutal ITSM</span>-->
+  <img src="images/logo.jpg" height="400" width="400"/>
   <form class="card" @submit.prevent="submit">
 
     <div class="brutal-auth__login">
@@ -51,6 +52,7 @@ export default defineComponent({
       }
     })
 
+
     async function submit() {
       const {token, errorMessage, completeAuth} = await useAuth({
         login: form.login.value,
@@ -89,7 +91,7 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  top: 250px;
 
   &__login {
     display: grid;
@@ -99,7 +101,7 @@ export default defineComponent({
   &__input {
     border-radius: $radius*3;
     padding-left: 20px;
-    background-color: #778899;
+    background-color: #fe1332;
     font-family: MornningBreeze;
   }
   &__btn {
@@ -150,6 +152,15 @@ small {
 .password_error {
   top: 50.8%;
   left: 20%;
+}
+
+img {
+  margin-bottom: 10px;
+}
+
+input {outline: none;}
+input:-webkit-autofill {
+  -webkit-box-shadow: inset 0 0 0 50px #fe1332 !important;
 }
 
 </style>

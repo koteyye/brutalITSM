@@ -3,10 +3,10 @@
     <img class="avatar" :src="userImg" alt="avatar" height="50" width="50" @error="handleImgError">
     <div class="login">{{users.login}}</div>
     <div class="username hover cursor-pointer">{{ users.lastname }} {{ users.firstname }} {{users.middlename}}</div>
-    <div class="job border">{{ users.jobname }}</div>
-    <div class="org">{{ users.orgname }}</div>
+    <div class="job border">{{ users.job }}</div>
+    <div class="org">{{ users.org }}</div>
     <div class="deleteUser cursor-pointer">
-      <fa  icon="fa-solid fa-trash"/>
+      <brutal-button icon="fa-solid fa-trash"></brutal-button>
     </div>
   </div>
 </template>
@@ -15,10 +15,12 @@
 import {computed, defineComponent} from "vue";
 import {s3url} from "@/shared/path-names";
 import {userInfo} from "@/plugins/router/auth-guard";
+import BrutalButton from "@/components/button/brutal-button.vue";
 
 
 export default defineComponent({
   name: "brutal-admin-panel-user-list.vue",
+  components: {BrutalButton},
   props: {
     users: {
       type: Object,
@@ -66,23 +68,28 @@ export default defineComponent({
 
 .avatar {
   border-radius: 100%;
+  color: $--color-apsidgray;
 }
 
 .login {
   flex-basis: 10%;
+  color: $--color-apsidgray;
 }
 .username {
   flex-basis: 40%;
+  color: $--color-apsidgray;
 }
 .job {
   flex-basis: 20%;
+  color: $--color-apsidgray;
 }
 .org {
   flex-basis: 20%;
+  color: $--color-apsidgray;
 }
 .deleteUser {
   position: absolute;
-  left: 99%;
+  left: 95%;
   margin-right: 2px;
 }
 

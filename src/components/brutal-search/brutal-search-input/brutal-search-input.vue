@@ -10,7 +10,7 @@
     >
     <div v-else class="search-input__selected">
       {{selectedValue}}
-      <div class="krestik search-input__selected-icon">
+      <div class="clear-result-btn search-input__selected-icon">
         <fa  icon="fa-solid fa-xmark" @click="clearSelected"/>
       </div>
     </div>
@@ -28,7 +28,7 @@ export default defineComponent({
       return ''
     },
     selectedValue: {
-      type: Object,
+      type: String,
       default: null
     },
     placeHolderText: {
@@ -40,9 +40,9 @@ export default defineComponent({
   },
   emits: ['update:query', 'update:selectedValue'],
   setup(props, {emit}) {
-    const emptySelected = computed(() => props.selectedValue === null)
+    const emptySelected = computed(() => props.selectedValue === '')
     function clearSelected() {
-      emit('update:selectedValue', null)
+      emit('update:selectedValue', '')
     }
 
     return {

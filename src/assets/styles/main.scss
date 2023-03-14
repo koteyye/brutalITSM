@@ -8,10 +8,10 @@ body {
 }
 
 .text {
-  color: $--color-apsidgray;
+  color: rgb(#fe1332, 0.6);
   font-family: MorningBreeze-Italic;
-  font-size: 15px;
-  letter-spacing: 3px;
+  font-size: 16px;
+  letter-spacing: 5px;
 }
 
 .header_text {
@@ -68,9 +68,10 @@ link:hover {
 }
 
 .background {
-  background: url("@/../public/images/5137894.jpg") 50%/ cover
-  border-box
-  padding-box;
+  //background: url("@/../public/images/5137894.jpg") 50%/ cover
+  //border-box
+  //padding-box;
+  background-color: black;
   top: 0;
   left: 0;
   background-repeat: no-repeat;

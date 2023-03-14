@@ -83,16 +83,16 @@ export default defineComponent({
   width: 98%;
   height: 100%;
   &__left-menu {
-    flex-basis: 20%;
-    background-color: rgba(#d1faff, 0.5);
+    flex-basis: 19%;
     border-radius: $radius*3;
+    border: 1px solid $--color-apsidgray;
   }
   &__work-area {
     position: relative;
     flex-basis: 80%;
-    background-color: rgba(#d1faff, 0.5);
     border-radius: $radius*3;
     left: 5px;
+    border: 1px solid $--color-apsidgray;
   }
 }
 
@@ -106,14 +106,15 @@ export default defineComponent({
   }
   &__items {
     display: grid;
+    color: $--color-apsidgray
   }
   &__item {
     padding: 10px;
     font-family: "MornningBreeze";
     font-size: 25px;
+    color: $--color-apsidgray;
     &:hover {
       text-decoration: none;
-      background-color: rgba(#21a4e5, 0.5);
       border-radius: $radius*3;
     }
   }
@@ -125,6 +126,7 @@ export default defineComponent({
   font-family: MorningBreeze-Bold;
   font-size: 20px;
   border-bottom: solid 2px rgba(113, 146, 152, 0.7);
+  color: $--color-apsidgray;
 }
 .avatar {
   width: 50px;

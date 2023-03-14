@@ -31,80 +31,67 @@ export default defineComponent({
         return {}
       }
     },
-    searchResult: {
-      type: Array,
+    placeholderText: {
+      type: String,
       default() {
-        return []
+        return ''
       }
     },
-    placeholderText: {
+    selectedVal: {
       type: String,
       default() {
         return ''
       }
     }
   },
-  emits: ['update:search-result','SearchRequest', 'selected'],
+  emits: ['update:selectedVal'],
   setup(props, {emit}) {
-    const query = ref('')
     const isSearchInputFocused = false
-    const selectedValue = ref(null)
-    const Selected = ref(false)
-    const searchResultTrue = ref([])
-    const searchResult = []
-    const errMessage = ''
+    const selectedValue = ref('')
+    const selected = ref(false)
+    const searchResult = ref([])
+    const errMessage = ref('')
 
 
     const searchParam = ref({
       service: props.searchOptions.service,
       searchObject: props.searchOptions.searchObject,
-      query: query.value
+      query: ''
     })
 
     watch( ()=> searchParam.value.query,
         async () => {
-          const {result, err} = await useSearch(searchParam)
-          writeResult(result, err)
+          if (searchParam.value.query !== '') {
+            const {result, err} = await useSearch(searchParam)
+            console.log(searchParam)
+            getResult(result, err)
+          }
         }
     )
 
-    async function getResult(result, err) {
+    function getResult(result, err) {
       searchResult.value = result.value
-      errMessage.value = err.value
-    }
-    console.log(searchResult.value)
-    console.log(errMessage.value)
-
-
-    function showResult(result) {
-      result.value = result
-      console.log(result)
+      console.log(searchResult.value)
+      if (err === '') {errMessage.value = err}
     }
 
-
-
-    watch(() => props.searchResult,
-        () => writeResult())
-    function writeResult(searchResult) {
-      searchResultTrue.value = searchResult
-      console.log(searchResultTrue.value)
-    }
     function clearQuery() {
-      query.value = ''
+      searchParam.value.query = ''
     }
     function onSelectedValue(values) {
       selectedValue.value = values.name
-      emit('update:search-result', [])
+      searchResult.value = []
+      emit('update:selectedVal', values.id) //Как тут указать, что мне нужно название поля из props.searchOptions.resultField ?
       clearQuery()
     }
     function clearSelected() {
-      selectedValue.value = null
-      Selected.value = false
-      emit('update:search-result', [])
+      selectedValue.value = ''
+      selected.value = false
     }
     return {
       searchParam,
-      query, isSearchInputFocused, onSelectedValue, selectedValue, Selected, clearSelected
+      searchResult,
+      isSearchInputFocused, onSelectedValue, selectedValue, selected, clearSelected
     }
   }
 })

@@ -2,7 +2,8 @@ import {computed, reactive} from "vue";
 import {useField} from "@/use/field";
 
 export function useForm(init = {}) {
-    const form = reactive({})
+    const form = reactive({
+    })
     const validKey = 'valid'
 
     for (const [key, value] of Object.entries(init)) {
