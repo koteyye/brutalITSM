@@ -8,8 +8,8 @@
       </div>
     </template>
     <template #buttons>
-      <brutal-button label="Нет, я нормальный" @click="handleRoutMainPage" class="brutal-trabl-modal__button"/>
-      <brutal-button label="Да, я такой" color="warning" @click="handleCreateTrabl" class="brutal-trabl-modal__button"/>
+      <brutal-button label="Нет, я нормальный" @click="handleRoutMainPage"/>
+      <brutal-button label="Да, я такой" color="warning" @click="handleCreateTrabl"/>
     </template>
   </brutal-modal>
 </template>
@@ -54,7 +54,7 @@ export default defineComponent(
 
 <style lang="scss" scoped>
 @import '../../../../assets/styles/main.scss';
-.brutal-trabl-modal {
+.brutal-admin-modal {
   &__body {
     margin: 6px 50px;
   }
@@ -67,9 +67,10 @@ export default defineComponent(
   }
   &__button {
     margin-top: 30px;
-    margin-right: 30px;
+    margin-right: 160px;
     border-radius: 24px;
   }
 }
+
 
 </style>

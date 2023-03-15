@@ -59,6 +59,16 @@
         </div>
       </div>
 
+      <div class="uploader">
+        <label class="uploader_name">Ебальник</label>
+        <brutal-uploader
+            v-model:model-value="form.avatar.value"
+            :accept-file="form.avatar.accept"
+            :is-disabled="form.avatar.filesLimits"
+            :limit-count="form.avatar.limit"
+        ></brutal-uploader>
+      </div>
+
       <div class="brutal-create-user__btn">
         <brutal-button class="brutal-create-user__button" label="Создать" type="submit" :disabled="!form.valid"></brutal-button>
       </div>
@@ -76,12 +86,13 @@ import {service} from "@/shared/path-names";
 import BrutalButton from "@/components/button/brutal-button.vue";
 import {createUser, useRole} from "@/use/user";
 import {useErrorToast, useInfoToast} from "@/plugins/toasts/toasts";
+import brutalUploader from "@/components/brutal-uploader";
 
 const required = val => !!val
 
 export default defineComponent({
   name: "brutal-admin-create-user.vue",
-  components: {BrutalButton, brutalSearch},
+  components: {BrutalButton, brutalSearch, brutalUploader},
   setup() {
     const error = ref('')
     const roles = ref(null)
@@ -122,6 +133,12 @@ export default defineComponent({
       },
       role: {
         value: ''
+      },
+      avatar: {
+        value: [],
+        accept: '.jpeg, .jpg, .png',
+        filesLimits: true,
+        limit: 1
       }
     })
 
@@ -166,7 +183,8 @@ export default defineComponent({
         useErrorToast(err.value)
       }
       else {
-        useInfoToast(`Пользователь создан. ID: ${userId.value}`)
+        useInfoToast(`Пользователь создан. ID: ${userId.value.id}`)
+        location.reload()
       }
     }
 

@@ -1,6 +1,7 @@
 import {useFetch, useFetchConfig} from "@/use/fetch";
 import {ref} from "vue";
 import {service} from "@/shared/path-names";
+import {useErrorToast, useInfoToast} from "@/plugins/toasts/toasts";
 
 export async function useUser() {
     const {fetchConfig} = useFetchConfig('GET')
@@ -51,6 +52,24 @@ export async function createUser(init = {}) {
 
     return {userId, err}
 
+}
+
+export async function deleteUser(id) {
+    const {fetchConfig} = useFetchConfig('DELETE')
+    const loaded = ref(false)
+    const result = ref('')
+
+    try{
+        const {response: delResult, request} = useFetch(`${service.userService}/api/users/delete/${id}`, fetchConfig)
+        if (!loaded.value) {
+            await request()
+            loaded.value = true
+        }
+        result.value = delResult.value
+    } catch {
+        useErrorToast('Не удалось удалить этого идиота')
+    }
+    return {result}
 }
 
 

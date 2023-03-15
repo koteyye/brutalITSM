@@ -81,7 +81,7 @@ export default defineComponent({
     function onSelectedValue(values) {
       selectedValue.value = values.name
       searchResult.value = []
-      emit('update:selectedVal', values.id) //Как тут указать, что мне нужно название поля из props.searchOptions.resultField ?
+      emit('update:selectedVal', values[`${props.searchOptions.resultField}`]) //Как тут указать, что мне нужно название поля из props.searchOptions.resultField ?
       clearQuery()
     }
     function clearSelected() {

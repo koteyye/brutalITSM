@@ -11,11 +11,11 @@ export async function authGuard(to, from, next) {
         next('/auth')
         useErrorToast('Ты не вошел в систему, идиот!')
     } else {
-        const {me} = await useMe()
-        userInfo.value = me.value
+        const {result} = await useMe()
+        userInfo.value = result.value
         if (requireRole) {
             const roles = to.meta.roles
-            const roleList = Object.values(me.value.roleList)
+            const roleList = Object.values(result.value.roleList)
             if (checkRole(roleList, roles)) {
                 next()
             } else {
